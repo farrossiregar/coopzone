@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserMember;
 use Illuminate\Support\Str;
+use App\Models\Iuran;
 
 class Insert extends Component
 {
@@ -51,14 +52,29 @@ class Insert extends Component
             'iuran_tetap'=> 'required'
         ]);
         foreach($this->check_id as $k => $user_member_id){
-            $thisyear = date("Y");
-            $periode = \App\Models\Iuran::where('user_member_id',$user_member_id)->where('type','Iuran')->get()->last();
-            $tahun = isset($periode->tahun) ? $periode->tahun : $thisyear;
 
-            $bulan = isset($periode->bulan) ? $periode->bulan : 0;
+            $member = UserMember::find($user_member_id);
+            /**
+             * cari data iuran berdasarkan tanggal di terima
+             * jika tidak ada data iuran berdasarkan tahun dan bulan di terima insert data iuran baru berdasarkan tahun diterima dan bulan diterima
+             */
+            $yearDiterima = date('Y',strtotime($member->tanggal_diterima));
+            $monthDiterima = date('m',strtotime($member->tanggal_diterima));
+            $findIuran = Iuran::where(['user_member_id'=>$user_member_id,'tahun'=>$yearDiterima,'bulan'=>$monthDiterima,'type'=>'Iuran'])->first();
+
+            if(!$findIuran) {
+                $tahun = $yearDiterima;
+                $bulan = $monthDiterima-1;
+            }else{
+                $periode = Iuran::where('user_member_id',$user_member_id)->where('type','Iuran')->get()->last();
+                $thisyear = date("Y");
+                $tahun = isset($periode->tahun) ? $periode->tahun : $thisyear;
+                $bulan = isset($periode->bulan) ? $periode->bulan : 0;
+            }
+
             for($count=1;$this->iuran_tetap>=$count;$count++){
                 $bulan++;
-                if(isset($periode->tahun)){
+                if(isset($tahun)){
                     if($bulan>12){ // jika sudah melebihi 12 bulan maka balik ke bulan ke 1 tapi tahun bertambah
                         $bulan = 1;
                         $tahun++;
