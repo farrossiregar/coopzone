@@ -174,6 +174,11 @@
                     
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD</label>
+                            <input type="file" class="form-control" id="ttd_member" wire:model="ttd_member">
+                            @error('ttd_member') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
+                        <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">Iuran <strong class="text-danger">Rp. {{format_idr(get_setting('iuran_tetap'))}}</strong> (Rp {{format_idr($total_iuran_tetap)}})</label>
                             <select class="form-control" wire:model="iuran_tetap" wire:change="calculate_">
                                 <option value=""> --- Minimal 1 Bulan --- </option>
@@ -291,6 +296,11 @@
                             <input type="file" class="form-control" id="foto_ktpwaris1" wire:model="foto_ktpwaris1">
                                 @error('foto_ktpwaris1') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD Ahli Waris 1</label>
+                            <input type="file" class="form-control" id="ttd_ahliwaris1" wire:model="ttd_ahliwaris1">
+                            @error('ttd_ahliwaris1') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -376,6 +386,11 @@
                             <input type="file" class="form-control" id="foto_ktpwaris2" wire:model="foto_ktpwaris2">
                             @error('foto_ktpwaris2') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD Ahli Waris 2</label>
+                            <input type="file" class="form-control" id="ttd_ahliwaris2" wire:model="ttd_ahliwaris2">
+                            @error('ttd_ahliwaris2') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
                     </div>
                 </div>
                 <div class="form-group col-md-12">

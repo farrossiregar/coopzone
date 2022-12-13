@@ -53,6 +53,7 @@ return array(
     'App\\Http\\Livewire\\KetuaYayasan\\Klaim\\Approval' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Klaim/Approval.php',
     'App\\Http\\Livewire\\KetuaYayasan\\Klaim\\Edit' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Klaim/Edit.php',
     'App\\Http\\Livewire\\KetuaYayasan\\Klaim\\Index' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Klaim/Index.php',
+    'App\\Http\\Livewire\\KetuaYayasan\\Klaim\\KlaimEditable' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Klaim/KlaimEditable.php',
     'App\\Http\\Livewire\\KetuaYayasan\\Member\\Approval' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Member/Approval.php',
     'App\\Http\\Livewire\\KetuaYayasan\\Member\\Edit' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Member/Edit.php',
     'App\\Http\\Livewire\\KetuaYayasan\\Member\\Index' => $baseDir . '/app/Http/Livewire/KetuaYayasan/Member/Index.php',

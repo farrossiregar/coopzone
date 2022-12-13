@@ -26,6 +26,7 @@ class Insert extends Component
 	public $phone_number;
 	public $blood_type;
 	public $foto_ktp;
+	public $ttd_member;
 	public $foto_kk;
 	public $pas_foto;
 	public $name_waris1;
@@ -38,6 +39,7 @@ class Insert extends Component
 	public $blood_typewaris1;
 	public $hubungananggota1;
 	public $foto_ktpwaris1;
+	public $ttd_ahliwaris1;
 	public $name_waris2;
 	public $tempat_lahirwaris2;
 	public $tanggal_lahirwaris2;
@@ -48,6 +50,7 @@ class Insert extends Component
 	public $blood_typewaris2;
 	public $hubungananggota2;
 	public $foto_ktpwaris2;
+	public $ttd_ahliwaris2;
 	public $namektp;
 	public $namekk;
 	public $namepasfoto;
@@ -542,10 +545,13 @@ class Insert extends Component
 		];
 
 		if($this->foto_ktp!="") $rules['foto_ktp'] = 'image:max:1024';
+		if($this->ttd_member!="") $rules['ttd_member'] = 'image:max:1024';
 		if($this->foto_kk!="") $rules['foto_kk'] = 'image:max:1024';
 		if($this->pas_foto!="") $rules['pas_foto'] = 'image:max:1024';
 		if($this->foto_ktpwaris1!="") $rules['foto_ktpwaris1'] = 'image:max:1024';
+		if($this->ttd_ahliwaris1!="") $rules['ttd_ahliwaris1'] = 'image:max:1024';
 		if($this->foto_ktpwaris2!="") $rules['foto_ktpwaris2'] = 'image:max:1024';
+		if($this->ttd_ahliwaris2!="") $rules['ttd_ahliwaris2'] = 'image:max:1024';
 		if($this->file_konfirmasi!="") $rules['file_konfirmasi'] = 'image:max:1024';
 		
 		$message_rules = [
@@ -634,6 +640,12 @@ class Insert extends Component
             $data->foto_ktp = $namektp;
         }
 
+		if($this->ttd_member!=""){
+            $ttdmember = 'ttd_member'.date('Ymdhis').'.'.$this->ttd_member->extension();
+            $this->ttd_member->storePubliclyAs('public',$ttdmember);
+            $data->ttd_member = $ttdmember;
+        }
+
         if($this->foto_kk!=""){
             $namekk = 'foto_kk'.date('Ymdhis').'.'.$this->foto_kk->extension();
             $this->foto_kk->storePubliclyAs('public',$namekk);
@@ -649,11 +661,21 @@ class Insert extends Component
             $this->foto_ktpwaris1->storePubliclyAs('public',$namefotoktpwaris1);
             $data->foto_ktpwaris1 = $namefotoktpwaris1;
         }
+		if($this->ttd_ahliwaris1!=""){
+            $ttdahliwaris1 = 'ttd_ahliwaris1'.date('Ymdhis').'.'.$this->ttd_ahliwaris1->extension();
+            $this->ttd_ahliwaris1->storePubliclyAs('public',$ttdahliwaris1);
+            $data->ttd_ahliwaris1 = $ttdahliwaris1;
+        }
         if($this->foto_ktpwaris2!=""){
             $namefotoktpwaris2 = 'foto_ktpwaris2'.date('Ymdhis').'.'.$this->foto_ktpwaris2->extension();
             $this->foto_ktpwaris2->storePubliclyAs('public',$namefotoktpwaris2);
             $data->foto_ktpwaris2 = $namefotoktpwaris2;
 		}
+		if($this->ttd_ahliwaris2!=""){
+            $ttdahliwaris2 = 'ttd_ahliwaris2'.date('Ymdhis').'.'.$this->ttd_ahliwaris2->extension();
+            $this->ttd_ahliwaris2->storePubliclyAs('public',$ttdahliwaris2);
+            $data->ttd_ahliwaris2 = $ttdahliwaris2;
+        }
 		if($this->file_konfirmasi!=""){
             $namekonfirmasi = 'file_konfirmasi'.date('Ymdhis').'.'.$this->file_konfirmasi->extension();
             $this->file_konfirmasi->storePubliclyAs('public',$namekonfirmasi);

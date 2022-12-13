@@ -264,6 +264,11 @@
                             <input type="file" class="form-control" id="pas_foto" wire:model="pas_foto">
                             @error('pas_foto') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>  
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD Member</label>
+                            <input type="file" class="form-control" id="ttd_member" wire:model="ttd_member">
+                            @error('ttd_member') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
 
                         <div class="form-group col-md-6">
                             <label>Koordinator Nama</label>
@@ -389,6 +394,11 @@
                             <input type="file" class="form-control" id="foto_ktpwaris1" wire:model="foto_ktpwaris1">
                             @error('foto_ktpwaris1') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD Ahli Waris 1</label>
+                            <input type="file" class="form-control" id="ttd_ahliwaris1" wire:model="ttd_ahliwaris1">
+                            @error('ttd_ahliwaris1') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
                     </div>
                 </div>
 
@@ -486,6 +496,11 @@
                             <input type="file" class="form-control" id="foto_ktpwaris2" wire:model="foto_ktpwaris2">
                                 @error('foto_ktpwaris2') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputAlamat">TTD Ahli Waris 2</label>
+                            <input type="file" class="form-control" id="ttd_ahliwaris2" wire:model="ttd_ahliwaris2">
+                            @error('ttd_ahliwaris2') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
                     </div>
                 </div>
                 <div class="form-group col-md-12">
