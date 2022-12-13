@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserMember;
 use Illuminate\Support\Str;
+use App\Models\Iuran;
 
 class Insert extends Component
 {
@@ -25,11 +26,6 @@ class Insert extends Component
         return view('livewire.iuran.insert');
     }
 
-    public function mount()
-    {
-        // $this->payment_date = date('Y-m-d');
-    }
-
     public function showInsertIuran($check_id)
     {
         $this->check_id = $check_id;
@@ -42,29 +38,43 @@ class Insert extends Component
             'file_konfirmasi' => 'image|max:1024',
         ]);
     }
+
     public function calculate_()
     {
-        // $this->total_iuran_tetap = $this->iuran_tetap * 8000;
-        // $this->total_sumbangan_tetap = $this->iuran_tetap * 2000;
-        // $this->total = $this->total_iuran_tetap + $this->total_sumbangan_tetap;
-
-        $this->total_iuran_tetap = $this->iuran_tetap * 30000;
+        $this->total_iuran_tetap = $this->iuran_tetap * get_setting('iuran_tetap');
         $this->total = $this->total_iuran_tetap;
     }
-     public function save()
+
+    public function save()
     { 
         $this->validate([
             'bank_account_id'=> 'required',
             'iuran_tetap'=> 'required'
         ]);
         foreach($this->check_id as $k => $user_member_id){
-            $periode = \App\Models\Iuran::where('user_member_id',$user_member_id)->where('type','Iuran')->get()->last();
-            $tahun = $periode->tahun?$periode->tahun: date('Y');
 
-            $bulan = isset($periode->bulan) ? $periode->bulan : 0;
+            $member = UserMember::find($user_member_id);
+            /**
+             * cari data iuran berdasarkan tanggal di terima
+             * jika tidak ada data iuran berdasarkan tahun dan bulan di terima insert data iuran baru berdasarkan tahun diterima dan bulan diterima
+             */
+            $yearDiterima = date('Y',strtotime($member->tanggal_diterima));
+            $monthDiterima = date('m',strtotime($member->tanggal_diterima));
+            $findIuran = Iuran::where(['user_member_id'=>$user_member_id,'tahun'=>$yearDiterima,'bulan'=>$monthDiterima,'type'=>'Iuran'])->first();
+
+            if(!$findIuran) {
+                $tahun = $yearDiterima;
+                $bulan = $monthDiterima-1;
+            }else{
+                $periode = Iuran::where('user_member_id',$user_member_id)->where('type','Iuran')->get()->last();
+                $thisyear = date("Y");
+                $tahun = isset($periode->tahun) ? $periode->tahun : $thisyear;
+                $bulan = isset($periode->bulan) ? $periode->bulan : 0;
+            }
+
             for($count=1;$this->iuran_tetap>=$count;$count++){
                 $bulan++;
-                if(isset($periode->tahun)){
+                if(isset($tahun)){
                     if($bulan>12){ // jika sudah melebihi 12 bulan maka balik ke bulan ke 1 tapi tahun bertambah
                         $bulan = 1;
                         $tahun++;
@@ -73,7 +83,7 @@ class Insert extends Component
 
                 $iuran = new \App\Models\Iuran();
                 $iuran->user_member_id = $user_member_id;
-                $iuran->nominal = 10000;
+                $iuran->nominal = get_setting('iuran_tetap');
                 $duration = '+'.($this->iuran_tetap - 1).'months';
 
                 $iuran->from_periode = isset($periode->to_periode) ?  date('Y-m-d',strtotime("+1 months",strtotime($periode->to_periode))) : date('Y-m-d',strtotime("+1 months"));

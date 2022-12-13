@@ -171,12 +171,9 @@ class Register extends Component
 
 	public function calculate_()
 	{
-		// $this->total_iuran_tetap = $this->iuran_tetap * get_setting('iuran_tetap');
 		$this->total_iuran_tetap = $this->iuran_tetap * 30000;
-		$this->total_sumbangan = $this->sumbangan * get_setting('sumbangan');
 		if($this->uang_pendaftaran!="") $this->total = $this->uang_pendaftaran;
 		$this->total += $this->total_iuran_tetap;
-		$this->total += $this->total_sumbangan;
 	}
 	
 	public function form1()
@@ -196,7 +193,6 @@ class Register extends Component
 			'name_kta' => 'required|string',
 			'phone_number' => 'required',
 			'iuran_tetap'=>'required',
-			'sumbangan'=>'required',
 			'uang_pendaftaran'=>'required|numeric|min:50000',
 			'tanggal_lahir' => 'required',
 			'email' => 'required',
@@ -384,7 +380,6 @@ class Register extends Component
 		$data->iuran_tetap = $this->iuran_tetap;
 		$data->total_iuran_tetap = $this->total_iuran_tetap;
 		$data->sumbangan = $this->sumbangan;
-		$data->total_sumbangan = $this->total_sumbangan;
 		$data->uang_pendaftaran = $this->uang_pendaftaran;
 		$data->total_pembayaran = $this->total;
 		
@@ -559,14 +554,16 @@ class Register extends Component
 
 		// $this->updateattachmentrekomendator($this->rand_id, $data->id);
 		
-
-		$messageWa = "Pendaftaran anda akan segera kami proses, silahkan melakukan pembayaran pada salah satu Rekening Kami dibawah ini, dengan nominal : *Rp. ".format_idr($this->total)."*\n\n";
-		//$messageWa .= "\nSilahkan lakukan pembayaran ke Nomor Rekening Perusahan dibawah ini\n\n";
-		foreach(BankAccount::all() as $bank){
-			$messageWa .= $bank->bank .' '. $bank->no_rekening .' an '. $bank->owner ."\n";
-		}
-		$messageWa  .= "\nKonfirmasi Pembayaran : \n<a href=\"". route('konfirmasi-pembayaran')."?s=". $this->form_no ."\">".route('konfirmasi-pembayaran')."?s=". $this->form_no ."</a>";        
-        sendNotifWa($messageWa, $this->phone_number);
+		// $messageWa = "Pendaftaran anda akan segera kami proses, silahkan melakukan pembayaran pada salah satu Rekening Kami dibawah ini, dengan nominal : *Rp. ".format_idr($this->total)."*\n\n";
+		// //$messageWa .= "\nSilahkan lakukan pembayaran ke Nomor Rekening Perusahan dibawah ini\n\n";
+		// foreach(BankAccount::all() as $bank){
+		// 	$messageWa .= $bank->bank .' '. $bank->no_rekening .' an '. $bank->owner ."\n";
+		// }
+		// $messageWa  .= "\nKonfirmasi Pembayaran : \n<a href=\"". route('konfirmasi-pembayaran')."?s=". $this->form_no ."\">".route('konfirmasi-pembayaran')."?s=". $this->form_no ."</a>";        
+        
+		$messageWa = "Pengajuan pendaftaran akan segera kami pross";
+        
+		sendNotifWa($messageWa, $this->phone_number);
         
 		\Mail::to($data->email)->send(new \App\Mail\GeneralEmail("[YS SANTA MARIA] - Pendaftaran Anggota",$messageWa));    
 
