@@ -7,7 +7,7 @@
             <div class="body">
                 <div class="number">
                     <h6>Anggota Aktif</h6>
-                    <span>{{format_idr(\App\Models\UserMember::where('status',2)->where('is_non_anggota',0)->count())}}</span>
+                    <span>32</span>
                 </div>
                 {{-- <small class="text-muted">19% compared to last week</small> --}}
             </div>
@@ -20,7 +20,7 @@
             <div class="body">
                 <div class="number">
                     <h6>Anggota Klaim</h6>
-                    <span>{{format_idr(\App\Models\Klaim::count())}}</span>
+                    <span>20</span>
                 </div>
                 {{-- <small class="text-muted">19% compared to last week</small> --}}
             </div>
@@ -33,7 +33,7 @@
             <div class="body">
                 <div class="number">
                     <h6>Iuran</h6>
-                    <span>{{format_idr(\App\Models\Iuran::sum('nominal'))}}</span>
+                    <span>Rp 20000</span>
                 </div>
                 {{-- <small class="text-muted">19% compared to last week</small> --}}
             </div>
@@ -46,7 +46,7 @@
             <div class="body">
                 <div class="number">
                     <h6>Klaim</h6>
-                    <span>{{format_idr(\App\Models\Klaim::sum('total')+\App\Models\KlaimAdditional::sum('nominal'))}}</span>
+                    <span>Rp 10000</span>
                 </div>
                 {{-- <small class="text-muted">19% compared to last week</small> --}}
             </div>
@@ -64,13 +64,13 @@
                 </ul>
                 <div class="tab-content px-0">
                     <div class="tab-pane active" id="anggota">
-                        <livewire:home.anggota />
+                        
                     </div>
                     <div class="tab-pane" id="klaim">
-                        <livewire:home.klaim />
+                        
                     </div>
                     <div class="tab-pane" id="iuran">
-                        <livewire:home.iuran />
+                        
                     </div>
                 </div>
             </div>
