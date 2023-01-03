@@ -104,7 +104,7 @@
                     <hr />
                     <a href="/"><i class="fa fa-arrow-left"></i> {{__('Back')}}</a>
                    
-                        <button type="submit" class="ml-3 btn btn-primary" wire:click="form3">{{ __('Submit') }} <i class="fa fa-check"></i></button>
+                        <button type="submit" class="ml-3 btn btn-primary" wire:click="save">{{ __('Submit') }} <i class="fa fa-check"></i></button>
                    
                     <span wire:loading>
                         <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>

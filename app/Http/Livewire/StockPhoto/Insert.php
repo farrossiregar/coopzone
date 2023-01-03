@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\StockPhoto;
-use App\Models\Iuran;
-use App\Models\User;
+use Image;
 use Illuminate\Validation\Rule; 
 
 class Insert extends Component 
@@ -84,6 +83,22 @@ class Insert extends Component
 		
 		];
 
+		// $image = $request->file('image');
+		$image = $this->stock_photo;
+        $input['imagename'] = time().'.'.$image->extension();
+		
+		$destinationPath = public_path('/thumbnail');
+        $img = Image::make($image->path());
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$input['imagename']);
+   
+        $destinationPath = public_path('/images');
+        $image->move($destinationPath, $input['imagename']);
+
+		dd('Insert Photo');
+
+
 		// if($this->foto_ktp!="") $rules['foto_ktp'] = 'image:max:1024';
 		
 		// $message_rules = [
@@ -92,44 +107,37 @@ class Insert extends Component
 		// ];
 		
 		// validate payment_date if empty
-		if(empty($this->payment_date)) $this->payment_date = date('Y-m-d');
+		// if(empty($this->payment_date)) $this->payment_date = date('Y-m-d');
 
-    	$this->validate($rules,$message_rules);
+    	// $this->validate($rules,$message_rules);
 	
-		$password = generate_password($this->name,$this->tanggal_lahir);
+		// $password = generate_password($this->name,$this->tanggal_lahir);
 		
-		$counting =  get_setting('counting_no_anggota_new')+1;
-		update_setting('counting_no_anggota_new',$counting);
+		// $counting =  get_setting('counting_no_anggota_new')+1;
+		// update_setting('counting_no_anggota_new',$counting);
 
-		$no_anggota = date('ym',strtotime($this->tanggal_diterima)).str_pad($counting,6, '0', STR_PAD_LEFT);
+		// $no_anggota = date('ym',strtotime($this->tanggal_diterima)).str_pad($counting,6, '0', STR_PAD_LEFT);
 		
-    	$user = new User();
-        $user->user_access_id = 4; // Member
-        $user->nik = $this->Id_Ktp;
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->telepon = $this->phone_number;
-        $user->address = $this->address;
-        $user->password = Hash::make($password);
-		$user->username = $no_anggota;
-        $user->save();
+    	// $user = new User();
+        // $user->user_access_id = 4; // Member
+        // $user->nik = $this->Id_Ktp;
+        // $user->password = Hash::make($password);
+        // $user->save();
 
-        $data = new UserMember();
+        // $data->masa_tenggang = date('Y-m-d',strtotime("+6 months",strtotime($this->tanggal_diterima)));
+
+
+
+        // if($this->stock_photo != ""){
+        //     // $stockphoto = 'foto_ktp'.date('Ymdhis').'.'.$this->foto_ktp->extension();
+        //     $stockphoto = $this->stock_photo->getClientOriginalName().'.'.$this->stock_photo->extension();
+        //     $this->stock_photo->storePubliclyAs('public/images',$stockphoto);
+        //     $this->stock_photo->storePubliclyAs('public/thumbnail',$stockphoto);
+        //     $data->stock_photo = $stockphoto;
+        // }
 		
-        $data->masa_tenggang = date('Y-m-d',strtotime("+6 months",strtotime($this->tanggal_diterima)));
-
-
-
-        if($this->stock_photo != ""){
-            // $stockphoto = 'foto_ktp'.date('Ymdhis').'.'.$this->foto_ktp->extension();
-            $stockphoto = $this->stock_photo->getClientOriginalName().'.'.$this->stock_photo->extension();
-            $this->stock_photo->storePubliclyAs('public/images',$stockphoto);
-            $this->stock_photo->storePubliclyAs('public/thumbnail',$stockphoto);
-            $data->stock_photo = $stockphoto;
-        }
-		
-		$data->koordinator_alamat = $this->koordinator_alamat;
-		$data->save();
+		// $data->koordinator_alamat = $this->koordinator_alamat;
+		// $data->save();
 
 		// Iuran
         // $bulan = date('m',strtotime($this->tanggal_diterima));
@@ -169,6 +177,6 @@ class Insert extends Component
         // $messageWa .= 'Masa Tunggu Klaim : '. date('d F Y',strtotime($data->masa_tenggang));
         // sendNotifWa($messageWa, $this->phone_number);
         
-		session()->flash('message-success',__('Photo berhasil disimpan'));
+		// session()->flash('message-success',__('Photo berhasil disimpan'));
     }
 }
