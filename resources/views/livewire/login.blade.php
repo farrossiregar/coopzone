@@ -12,10 +12,10 @@
                 </div>
                 <div class="body">
                     <form class="form-auth-small" method="POST" wire:submit.prevent="login" action="">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label><input type="radio" wire:model="type_login" value="1" /> Sapphire </label>
                             <label><input type="radio" wire:model="type_login" value="2" /> Platinum</label>
-                        </div>
+                        </div> -->
                         @if($message)
                        <p class="text-danger">{{$message}}</p>
                         @endif
@@ -41,10 +41,10 @@
                                 </label>								
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block mt-1"><i class="fa fa-sign-in mr-2"></i>{{ __('LOGIN') }}</button>
-                            <a href="register" class="btn btn-info btn-lg btn-block mt-1"><i class="fa fa-edit mr-2"></i>{{ __('DAFTAR') }}</a>
-                            <div class="bottom">
+                            <!-- <a href="register" class="btn btn-info btn-lg btn-block mt-1"><i class="fa fa-edit mr-2"></i>{{ __('DAFTAR') }}</a> -->
+                            <!-- <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-money"></i> <a href="konfirmasi-pendaftaran">{{ __('Konfirmasi Pembayaran') }}</a></span>
-                            </div> 
+                            </div>  -->
                         @else
                             <div class="form-group">
                                 <label for="signin-email" class="sr-only control-label">{{ __('Email') }}</label>

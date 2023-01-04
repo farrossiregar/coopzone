@@ -2,7 +2,7 @@
 @section('parentPageTitle', '')
 
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <!-- <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card overflowhidden number-chart">
             <div class="body">
                 <div class="number">
@@ -53,7 +53,7 @@
             <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
             data-line-Width="1" data-line-Color="#4f81bc" data-fill-Color="#95b3d7">1,3,5,1,4,2</div>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-12">
         <div class="card">
             <div class="body">

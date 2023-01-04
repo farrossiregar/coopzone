@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-6">
                     <!-- <a href="javascript:;" class="ml-2 btn btn-info" wire:click="downloadExcel"><i class="fa fa-download"></i> Download</a> -->
-                    <a href="{{route('stock-photo.insert')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Image</a>
+                    
                     <span wire:loading>
                         <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
                         <span class="sr-only">{{ __('Loading...') }}</span>
@@ -33,75 +33,72 @@
                 </div>
             </div>
             <div class="body pt-0">
-                <div class="table-responsive" style="min-height:400px;">
-                    <table class="table table-hover m-b-0 c_list">
-                        <thead>
-                            <tr style="background: #eee;">
-                                <th>No</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Subcategory</th>
-                                <th>Source</th>
-                                <th>Uploaded Date</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($number= $data->total() - (($data->currentPage() -1) * $data->perPage()) )
-                            @foreach($data as $k => $item)
-                            <tr>
-                                <td style="width: 50px;">{{$k+1}}</td>
-                                <td style="width: 50px;">
-                                    <img src="{{ asset('assets/img/bg-auth.jpg') }}" alt="Image" style="width: 95px;"/>
-                                    <?php //echo asset("storage/app/public/klaim/foto_kta20220917115852.jpg"); ?>
-                                    <!-- <img src="{{ public_path('storage/app/public/foto_kta20220917115852.jpg') }}" alt="Image" style="width: 120px;"/> -->
-                                    <!-- <img src="{{ base_path('public/foto_kta20220917115852.jpg') }}" alt="Image Stock" style="width: 120px;"/> -->
-                                    <!-- <br>asset('storage/Vendor_Management/Org_chart/'.$item->org_chart.'') -->
-                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
-                                    <?php //echo public_path("storage/app/public/foto_kta20220917115852.jpg"); ?>
-                                    <br>
-                                    
-                                    <!-- {{$item->foto_name}} -->
-                                </td>
-                                <td style="width: 50px;">{{$item->name}}</td>
-                                <td style="width: 50px;">{{$item->category}}</td>
-                                <td style="width: 50px;">{{$item->subcategory}}</td>
-                                <td style="width: 50px;">{{$item->foto_source}}</td>
-                                <td style="width: 50px;">{{$item->created_at}}</td>
-                                
-                                <td> 
-                                    <a href="javascript:void(0)" class="badge badge-warning">Inactive</a>
-                                </td>
-                                
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
-                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            @if($item->user_id && $item->status < 4)
-                                            <a href="#" class="dropdown-item text-success" onclick="autologin('{{ route('users.autologin',['id'=>$item->user_id]) }}','{{$item->name}}')" title="Autologin"><i class="fa fa-sign-in"></i> Autologin</a>
-                                            @endif
-                                            <a class="dropdown-item" href="{{route('user-member.edit',['id'=>$item->id])}}"><i class="fa fa-search-plus"></i> Detail</a>
-                                            <a class="dropdown-item" href="{{route('user-member.print-member',['id'=>$item->id])}}" target="_blank"><i class="fa fa-print"></i> Print</a>
-                                            @if($item->status_pembayaran < 1)
-                                                <a class="dropdown-item text-danger" href="{{route('user-member.proses',['id'=>$item->id])}}"><i class="fa fa-check"></i> Konfirmasi</a>
-                                            @endif
-                                            @if($item->status_pembayaran == 1)
-                                                @if($item->admin_approval === NULL || $item->admin_approval < 0)
-                                                <a class="dropdown-item text-danger" href="{{route('user-member.approval',['id'=>$item->id])}}"><i class="fa fa-check"></i> Konfirmasi</a>
-                                                @endif
-                                            @endif
-                                            <a class="dropdown-item" href="javascript:void(0)" wire:click="set_member({{$item->id}})" data-toggle="modal" data-target="#modal_set_password"><i class="fa fa-key"></i> Set Password</a>
-                                        </div>
-                                    </div>    
-                                </td>
-                            </tr>
-                            @php($number--)
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive" style="min-height:400px;">
+                            <div class="row">
+                                <div class="col-md-8"><h3>Category</h3></div>
+                                <div class="col-md-4">
+                                    <a href="{{route('stock-photo.insert')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Category</a>
+                                </div>
+                            </div>
+                            
+                            <table class="table table-hover m-b-0 c_list">
+                                <thead>
+                                    <tr style="background: #eee;">
+                                        <th>No</th>
+                                        <th>Category</th>
+                                        <th>Uploaded Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php($number= $data->total() - (($data->currentPage() -1) * $data->perPage()) )
+                                    @foreach($data as $k => $item)
+                                    <tr>
+                                        <td style="width: 50px;">{{$k+1}}</td>
+                                        <td style="width: 50px;">{{$item->category}}</td>
+                                        <td style="width: 50px;">{{$item->created_at}}</td>
+                                        
+                                    </tr>
+                                    @php($number--)
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="table-responsive" style="min-height:400px;">
+                            <div class="row">
+                                <div class="col-md-8"><h3>Subcategory</h3></div>
+                                <div class="col-md-4">
+                                    <a href="{{route('stock-photo.insert')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Category</a>
+                                </div>
+                            </div>
+                            <table class="table table-hover m-b-0 c_list">
+                                <thead>
+                                    <tr style="background: #eee;">
+                                        <th>No</th>
+                                        <th>Name Subcategory</th>
+                                        <th>Category Parent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php($number= $data->total() - (($data->currentPage() -1) * $data->perPage()) )
+                                    @foreach($data as $k => $item)
+                                    <tr>
+                                        <td style="width: 50px;">{{$k+1}}</td>
+                                        <td style="width: 50px;">{{$item->category}}</td>
+                                        <td style="width: 50px;">{{$item->subcategory}}</td>
+                                    </tr>
+                                    @php($number--)
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                
                 <br />
                 {{$data->links()}}
             </div>

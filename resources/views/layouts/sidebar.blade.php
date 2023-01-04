@@ -62,7 +62,7 @@
                             <a href="{{route('stock-photo.index')}}"><i class="fa fa-gear"></i>Upload Image</a>
                         </li>
                         <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
-                            <a href="{{route('setting')}}"><i class="fa fa-gear"></i>Category & Sub Category</a>
+                            <a href="{{route('category-subcategory.index')}}"><i class="fa fa-gear"></i>Category & Sub Category</a>
                         </li>
                         
                         @endif

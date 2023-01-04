@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Livewire\StockPhoto;
+namespace App\Http\Livewire\CategorySubcategory;
 
 use App\Models\UserAccess;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +11,7 @@ use App\Models\Subcategory;
 use Image;
 use Illuminate\Validation\Rule; 
 
-class Insert extends Component 
+class InsertCategory extends Component 
 {
 	use WithFileUploads;
 	public $stock_photo, $foto_source, $foto_caption, $category, $subcategory;
