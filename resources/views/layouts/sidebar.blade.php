@@ -42,55 +42,18 @@
             <div class="tab-pane active" id="menu">
                 <nav id="left-sidebar-nav" class="sidebar-nav">
                     <ul id="main-menu" class="metismenu">    
-                        @if(\Auth::user()->user_access_id==1 || \Auth::user()->user_access_id==5)<!--Administrator-->                   
+                                       
                         <li class="{{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
                             <a href="/"><i class="icon-home"></i> <span>Dashboard</span></a>
                         </li>
-                        <!-- <li class="{{ (Request::segment(1) === 'users') ? 'active' : null }}">
-                            <a href="{{route('users.index')}}"><i class="icon-users"></i> <span>User Login</span></a>
-                        </li>
-                        <li class="{{ Request::segment(1) === 'user-member' ? 'active' : null }}">
-                            <a href="{{route('user-member.index')}}"><i class="icon-users"></i> <span>Anggota</span></a>
-                        </li>
-                     
-                        <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
-                            <a href="{{route('setting')}}"><i class="fa fa-gear"></i>Setting</a>
-                        </li> -->
-
 
                         <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
-                            <a href="{{route('stock-photo.index')}}"><i class="fa fa-gear"></i>Upload Image</a>
+                            <a href="{{route('stock-photo.index')}}"><i class="fa fa-image"></i>Upload Image</a>
                         </li>
                         <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
                             <a href="{{route('category-subcategory.index')}}"><i class="fa fa-gear"></i>Category & Sub Category</a>
                         </li>
                         
-                        @endif
-                        @if(\Auth::user()->user_access_id==2)<!--Ketua Yayasan-->     
-                        <li class="{{ Request::segment(2) === 'member' ? 'active' : null }}">
-                            <a href="{{route('ketua-yayasan.member')}}"><i class="fa fa-users"></i> <span>Anggota</span></a>
-                        </li>
-                        <li class="{{ Request::segment(2) === 'klaim' ? 'active' : null }}">
-                            <a href="{{route('ketua-yayasan.klaim')}}"><i class="fa fa-database"></i> <span>Klaim</span></a>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->user_access_id==3)<!--Kordinator-->  
-                        <li class="{{ Request::segment(3) === 'biodata' ? 'active' : null }}">
-                            <a href="{{route('koordinator.biodata')}}"><i class="fa fa-users"></i> <span>Biodata</span></a>
-                        </li> 
-                       
-                        @endif
-                        @if(\Auth::user()->user_access_id==4)<!--Anggota-->     
-                        <li class="{{ Request::segment(4) === 'member' ? 'active' : null }}">
-                            <a href="{{route('anggota.member')}}"><i class="fa fa-users"></i> <span>Biodata</span></a>
-                        </li>
-                        
-                        @endif
-                        @if(\Auth::user()->user_access_id==5)<!--Kasir-->     
-                        <li class="{{ Request::segment(2) === 'member' ? 'active' : null }}">
-                            <a href="{{route('kasir.index')}}"><i class="fa fa-home"></i> <span>Dashboard</span></a>
-                        </li>
-                        @endif
                     </ul>
                 </nav>
             </div>      

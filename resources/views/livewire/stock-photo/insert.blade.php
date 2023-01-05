@@ -14,10 +14,7 @@
             </div>
             <div class="col-md-12"><hr class="mt-0" style="border:1px solid #18a2b8" /></div>
         </div>
-        <!-- <div >
-            <h6 class="text-success"><span><i class="fa fa-check"></i></span> Pendaftaran anda berhasil dilakukan</h6>
-            {{-- <p>Terima kasih telah mendaftarkan diri anda sebagai Anggota Yayasan Sosial Santa Maria. Data diri anda akan segera kami proses setelah pembayaran kami terima. Silahkan cek email / Whatsapp anda untuk mendapatkan informasi pembayaran.</p> --}}
-        </div> -->
+
         <form class="form-auth-small" method="POST" wire:submit.prevent="save" action="" >
             
             <div class="row" >
@@ -95,7 +92,7 @@
                     <hr />
                     <a href="/"><i class="fa fa-arrow-left"></i> {{__('Back')}}</a>
                    
-                        <button type="submit" class="ml-3 btn btn-primary" wire:click="save">{{ __('Submit') }} <i class="fa fa-check"></i></button>
+                        <button type="submit" class="ml-3 btn btn-primary">{{ __('Submit') }} <i class="fa fa-check"></i></button>
                    
                     <span wire:loading>
                         <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>

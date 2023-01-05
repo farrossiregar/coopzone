@@ -17,9 +17,6 @@ use App\Http\Livewire\Home;
 Route::get('/', Home::class)->name('home')->middleware('auth');
 Route::get('privacy', App\Http\Livewire\Privacy::class)->name('privacy');
 Route::get('login', App\Http\Livewire\Login::class)->name('login');
-// Route::get('register', App\Http\Livewire\Register::class)->name('register');
-// Route::get('konfirmasi-pembayaran',App\Http\Livewire\KonfirmasiPembayaran::class)->name('konfirmasi-pembayaran');
-// Route::get('konfirmasi-pendaftaran',App\Http\Livewire\KonfirmasiPendaftaran::class)->name('konfirmasi-pendaftaran');
 
 
 Route::get('testemail',function(){

@@ -35,11 +35,6 @@ class Insert extends Component
 	public function save()
     {
 		$rules = [
-			// 'Id_Ktp'=>['required',
-			// 				Rule::unique('user_member')->where(function($query) {
-			// 					$query->where('Id_Ktp', $this->Id_Ktp)->where('status', 2);
-			// 				})
-			// 			],
 			'foto_caption' => 'required|string',
 			'foto_source' => 'required|string',
 			'category' => 'required',
@@ -69,6 +64,7 @@ class Insert extends Component
         $data->foto_source	= $this->foto_source;
         $data->category		= $this->category;
         $data->subcategory	= $this->subcategory;
+        $data->status		= 1;
         $data->save();
 
 
@@ -86,5 +82,7 @@ class Insert extends Component
         // sendNotifWa($messageWa, $this->phone_number);
         
 		session()->flash('message-success',__('Photo berhasil disimpan'));
+
+        return redirect()->to('stock-photo');
     }
 }
