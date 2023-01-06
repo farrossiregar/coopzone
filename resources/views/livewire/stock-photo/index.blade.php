@@ -54,12 +54,14 @@
                             <tr>
                                 <td style="width: 50px;">{{$k+1}}</td>
                                 <td style="width: 50px;">
-                                    <img src="{{ asset('assets/img/bg-auth.jpg') }}" alt="Image" style="width: 95px;"/>
+                                    <!-- <img src="{{ asset('assets/img/bg-auth.jpg') }}" alt="Image" style="width: 95px;"/> -->
                                     <?php //echo asset("storage/app/public/klaim/foto_kta20220917115852.jpg"); ?>
-                                    <!-- <img src="{{ public_path('storage/app/public/foto_kta20220917115852.jpg') }}" alt="Image" style="width: 120px;"/> -->
+                                    <img src="<?php echo asset('storage/Stock_Photo/thumbnail/'.$item->stock_photo); ?>" alt="Image" style="width: 120px;"/>
+                                    <!-- <img src="{{ public_path('foto_kta20220917115852.jpg') }}" alt="Image" style="width: 120px;"/> -->
                                     <!-- <img src="{{ base_path('public/foto_kta20220917115852.jpg') }}" alt="Image Stock" style="width: 120px;"/> -->
-                                    <!-- <br>asset('storage/Vendor_Management/Org_chart/'.$item->org_chart.'') -->
-                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
+                                    <!-- <img src="{{ asset('storage/Vendor_Management/Org_chart/'.$item->org_chart.'') }}" alt="Image" style="width: 120px;"/> -->
+                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;">
+                                    <img src="{{ asset('public/klaim/foto_kta20220917115850.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
                                     <?php //echo public_path("storage/app/public/foto_kta20220917115852.jpg"); ?>
                                     <br>
                                     

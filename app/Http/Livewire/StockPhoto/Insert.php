@@ -44,23 +44,29 @@ class Insert extends Component
 		];
 
 		// $image = $request->file('image');
-		// $image = $this->stock_photo;
-        // $input['imagename'] = time().'.'.$image->extension();
-		
-		// $destinationPath = public_path('/thumbnail');
-        // $img = Image::make($image->path());
-        // $img->resize(100, 100, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // })->save($destinationPath.'/'.$input['imagename']);
-   
-        // $destinationPath = public_path('/images');
-        // $image->move($destinationPath, $input['imagename']);
+		$image = $this->stock_photo;
 
-		// dd('Insert Photo');
+		// dd($image->getClientOriginalName());
+
+        // $input['imagename'] = time().'.'.$image->extension();
+        $input['imagename'] = strtolower(str_replace(" ", "-", $image->getClientOriginalName())).'.'.$image->extension();
+		
+		$destinationPathThumb = public_path('Stock_Photo\thumbnail');
+		
+        $img = Image::make($image->path());
+        $img->resize(240, 240, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPathThumb.'\\'.$input['imagename']);
+   
+        // $destinationPathFull = public_path('Stock_Photo\images');
+        // $image->move($destinationPathFull, $input['imagename']);
+
+		$this->stock_photo->storePubliclyAs('Stock_Photo\images',$input['imagename']);
+
 
 		$data 				= new StockPhoto();
         $data->name			= $this->foto_caption;
-        $data->foto_name	= $this->stock_photo;
+        $data->foto_name	= $input['imagename'];
         $data->foto_source	= $this->foto_source;
         $data->category		= $this->category;
         $data->subcategory	= $this->subcategory;
