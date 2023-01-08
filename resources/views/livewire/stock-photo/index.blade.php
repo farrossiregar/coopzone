@@ -60,9 +60,10 @@
                                     <!-- <img src="{{ public_path('foto_kta20220917115852.jpg') }}" alt="Image" style="width: 120px;"/> -->
                                     <!-- <img src="{{ base_path('public/foto_kta20220917115852.jpg') }}" alt="Image Stock" style="width: 120px;"/> -->
                                     <!-- <img src="{{ asset('storage/Vendor_Management/Org_chart/'.$item->org_chart.'') }}" alt="Image" style="width: 120px;"/> -->
-                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;">
-                                    <img src="{{ asset('public/klaim/foto_kta20220917115850.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
+                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
+                                    <!-- <img src="{{ asset('public/klaim/foto_kta20220917115850.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
                                     <?php //echo public_path("storage/app/public/foto_kta20220917115852.jpg"); ?>
+                                    <!-- <img src="{{ asset('storage/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logosss" style="width:100%;"> -->
                                     <br>
                                     
                                     <!-- {{$item->foto_name}} -->

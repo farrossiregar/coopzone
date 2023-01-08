@@ -5,6 +5,8 @@ namespace App\Http\Livewire\CategorySubcategory;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\StockPhoto;
+use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,8 +19,6 @@ class Index extends Component
     public function render()
     {
         $data = StockPhoto::orderBy('id', 'desc');
-        
-
 
         return view('livewire.category-subcategory.index')
                 ->layout('layouts.app')
@@ -27,9 +27,15 @@ class Index extends Component
 
     
 
-    public function delete($id)
+    public function deletecategory($id)
     {
-        UserMember::find($id)->delete();
+        Category::find($id)->delete();
+    }
+
+
+    public function deletesubcategory($id)
+    {
+        Subcategory::find($id)->delete();
     }
     
     

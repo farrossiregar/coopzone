@@ -62,6 +62,7 @@ class Insert extends Component
         // $image->move($destinationPathFull, $input['imagename']);
 
 		$this->stock_photo->storePubliclyAs('Stock_Photo\images',$input['imagename']);
+		// $this->stock_photo->store('toPath', ['disk' => 'public']);
 
 
 		$data 				= new StockPhoto();

@@ -1,10 +1,10 @@
-@section('title', "Tambah Anggota")
-@section('parentPageTitle', 'Anggota')
+@section('title', "Tambah Subcategory")
+@section('parentPageTitle', 'Subcategory')
 <div class="mt-2 card">
     <div class="card-body">
         <div class="row" >
             <div class="form-group col-md-8">
-                <h5 class="text-info">DATA IMAGE</h5>
+                <h5 class="text-info">DATA SUBCATEGORY</h5>
             </div>
             <div class="col-md-4 text-right">
                 <span wire:loading>
@@ -24,42 +24,23 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label>Image</label>
-                            <input type="file" class="form-control" id="stock_photo" wire:model="stock_photo">
-                            @error('stock_photo') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputName">Caption</label>
-                            <input type="text" class="form-control" id="foto_caption" placeholder="Enter Image Caption" wire:model="foto_caption">
-                            @error('foto_caption') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputName">Source</label>
-                            <input type="text" class="form-control" id="foto_source" placeholder="Enter Image Source" wire:model="foto_source">
-                            @error('foto_source') <span class="text-danger">{{ $message }}</span> @enderror
+                            <label for="exampleInputName">Subcategory</label>
+                            <input type="text" class="form-control" id="name_subcategory" placeholder="Subcategory" wire:model="name_subcategory">
+                            @error('name_subcategory') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="exampleInputAlamat">Category</label>
-                            <select class="form-control" name="category" wire:model="category">
+                            <select class="form-control" name="id_category" wire:model="id_category">
                                 <option value=""> --- Category --- </option>
                                 @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $item)
-                                <option>{{$item->name_category}}</option> 
+                                <option value="{{$item->id}}">{{$item->name_category}}</option> 
                                 @endforeach
                             </select>
                             @error('category') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputAlamat">Sub Category</label>
-                            <select class="form-control" name="subcategory" wire:model="subcategory">
-                                <option value=""> --- Sub Category --- </option>
-                                @foreach(\App\Models\Subcategory::orderBy('id', 'desc')->get() as $item)
-                                <option>{{$item->name_subcategory}}</option> 
-                                @endforeach
-                            </select>
-                            @error('subcategory') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
+                      
                     </div>
 
 
@@ -95,7 +76,7 @@
                     <hr />
                     <a href="/"><i class="fa fa-arrow-left"></i> {{__('Back')}}</a>
                    
-                        <button type="submit" class="ml-3 btn btn-primary" wire:click="save">{{ __('Submit') }} <i class="fa fa-check"></i></button>
+                        <button type="submit" class="ml-3 btn btn-primary" >{{ __('Submit') }} <i class="fa fa-check"></i></button>
                    
                     <span wire:loading>
                         <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>

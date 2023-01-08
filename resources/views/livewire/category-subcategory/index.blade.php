@@ -34,15 +34,25 @@
                                         <th>No</th>
                                         <th>Category</th>
                                         <th>Uploaded Date</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach(\App\Models\Category::orderBy('id', 'desc')->get() as $k => $item)
                                     <tr>
-                                        <td style="width: 50px;">{{$k+1}}</td>
-                                        <td style="width: 50px;">{{$item->name_category}}</td>
-                                        <td style="width: 50px;">{{$item->created_at}}</td>
-                                        
+                                        <td>{{$k+1}}</td>
+                                        <td style="width: 25%;">{{$item->name_category}}</td>
+                                        <td style="width: 25%;">{{@$item->created_at}}</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <!-- <a class="dropdown-item" href="{{route('user-member.edit',['id'=>$item->id])}}"><i class="fa fa-trash"></i> Delete</a> -->
+                                                    <a class="dropdown-item" href="javascript:void(0)" wire:click="deletecategory({{$item->id}})"><i class="fa fa-trash"></i> Delete</a>
+                                                    <!-- <a class="dropdown-item" href="javascript:void(0)" wire:click="set_member({{$item->id}})" data-toggle="modal" data-target="#modal_set_password"><i class="fa fa-key"></i> Set Password</a> -->
+                                                </div>
+                                            </div>    
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -64,8 +74,9 @@
                                 <thead>
                                     <tr style="background: #eee;">
                                         <th>No</th>
-                                        <th>Name Subcategory</th>
-                                        <th>Category Parent</th>
+                                        <th style="width: 25%">Name Subcategory</th>
+                                        <th style="width: 25%">Category Parent</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,7 +84,17 @@
                                     <tr>
                                         <td style="width: 50px;">{{$k+1}}</td>
                                         <td style="width: 50px;">{{$item->name_subcategory}}</td>
-                                        <td style="width: 50px;">{{\App\Models\Category::where('id', $item->id_category)->first()->name_category }}</td>
+                                        <td style="width: 50px;">{{@\App\Models\Category::where('id', $item->id_category)->first()->name_category }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <!-- <a class="dropdown-item" href="{{route('user-member.edit',['id'=>$item->id])}}"><i class="fa fa-trash"></i> Delete</a> -->
+                                                    <a class="dropdown-item" href="javascript:void(0)" wire:click="deletesubcategory({{$item->id}})"><i class="fa fa-trash"></i> Delete</a>
+                                                    <!-- <a class="dropdown-item" href="javascript:void(0)" wire:click="set_member({{$item->id}})" data-toggle="modal" data-target="#modal_set_password"><i class="fa fa-key"></i> Set Password</a> -->
+                                                </div>
+                                            </div>    
+                                        </td>
                                     </tr>
                                     
                                     @endforeach
