@@ -41,7 +41,7 @@
                                 </label>								
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block mt-1"><i class="fa fa-sign-in mr-2"></i>{{ __('LOGIN') }}</button>
-                            <!-- <a href="register" class="btn btn-info btn-lg btn-block mt-1"><i class="fa fa-edit mr-2"></i>{{ __('DAFTAR') }}</a> -->
+                            <a href="register" class="btn btn-info btn-lg btn-block mt-1"><i class="fa fa-edit mr-2"></i>{{ __('DAFTAR') }}</a>
                             <!-- <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-money"></i> <a href="konfirmasi-pendaftaran">{{ __('Konfirmasi Pembayaran') }}</a></span>
                             </div>  -->
