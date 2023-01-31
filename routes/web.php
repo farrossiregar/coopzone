@@ -87,4 +87,6 @@ Route::group(['middleware' => ['auth','access:1,5']], function(){
     Route::get('category-subcategory', App\Http\Livewire\CategorySubcategory\Index::class)->name('category-subcategory.index');
     Route::get('category/insert', App\Http\Livewire\CategorySubcategory\InsertCategory::class)->name('category.insert');
     Route::get('subcategory/insert', App\Http\Livewire\CategorySubcategory\InsertSubcategory::class)->name('subcategory.insert');
+
+    Route::get('work-order', App\Http\Livewire\WorkOrder\Index::class)->name('work-order.index');
 });

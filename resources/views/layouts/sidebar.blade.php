@@ -47,13 +47,16 @@
                             <a href="/"><i class="icon-home"></i> <span>Dashboard</span></a>
                         </li>
 
-                        <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
+                        <!-- <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
                             <a href="{{route('stock-photo.index')}}"><i class="fa fa-image"></i>Upload Image</a>
                         </li>
                         <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
                             <a href="{{route('category-subcategory.index')}}"><i class="fa fa-gear"></i>Category & Sub Category</a>
-                        </li>
+                        </li> -->
                         
+                        <li class="{{ (Request::segment(1) === 'setting') ? 'active' : null }}">
+                            <a href="{{route('work-order.index')}}"><i class="fa fa-gear"></i>Work Order</a>
+                        </li>
                     </ul>
                 </nav>
             </div>      

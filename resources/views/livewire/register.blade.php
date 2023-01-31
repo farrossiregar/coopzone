@@ -37,8 +37,8 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">WO Number</label>
-                            <input type="text" class="form-control" wire:change="checkKTP" id="Id_Ktp" placeholder="Enter ID" wire:model="Id_Ktp">
-                            @error('Id_Ktp') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="text" class="form-control" wire:model="wo_number">
+                            @error('wo_number') <span class="text-danger">{{ $message }}</span> @enderror
 <!--                             
                             <div class="alert alert-warning alert-dismissible" role="alert">
                                 <i class="fa fa-info"></i> Data KTP sudah digunakan
@@ -47,48 +47,43 @@
                         </div> 
                         <div class="col-md-6">
                             <label>WO Date</label>
-                            <input type="text" class="form-control" wire:model="no_anggota_gold" />
+                            <input type="text" class="form-control" wire:model="wo_date" />
+                            @error('wo_date') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">Requester Name</label>
-                            <input type="text" class="form-control" wire:change="checkKTP" id="Id_Ktp" placeholder="Enter ID" wire:model="Id_Ktp">
-                            @error('Id_Ktp') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="text" class="form-control" wire:model="requester_name">
+                            @error('requester_name') <span class="text-danger">{{ $message }}</span> @enderror
                             
                         </div> 
                         <div class="col-md-6">
                             <label>Phone</label>
-                            <input type="text" class="form-control" wire:model="no_anggota_gold" />
+                            <input type="text" class="form-control" wire:model="phone" />
+                            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputAlamat">Requester Name</label>
-                            <input type="text" class="form-control" wire:change="checkKTP" id="Id_Ktp" placeholder="Enter ID" wire:model="Id_Ktp">
-                            @error('Id_Ktp') <span class="text-danger">{{ $message }}</span> @enderror 
-                        </div> 
-                        <div class="col-md-6">
-                            <label>Phone</label>
-                            <input type="text" class="form-control" wire:model="no_anggota_gold" />
-                        </div>
 
                         <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">Business Name</label>
-                            <input type="text" class="form-control" wire:change="checkKTP" id="Id_Ktp" placeholder="Enter ID" wire:model="Id_Ktp">
-                            @error('Id_Ktp') <span class="text-danger">{{ $message }}</span> @enderror 
+                            <input type="text" class="form-control" wire:model="business_name">
+                            @error('business_name') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div> 
                         <div class="col-md-6">
                             <label>Cooperative Name</label>
-                            <input type="text" class="form-control" wire:model="no_anggota_gold" />
+                            <input type="text" class="form-control" wire:model="cooperative_name" />
+                            @error('cooperative_name') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">Email</label>
-                            <input type="text" class="form-control" wire:change="checkKTP" id="Id_Ktp" placeholder="Enter ID" wire:model="Id_Ktp">
-                            @error('Id_Ktp') <span class="text-danger">{{ $message }}</span> @enderror 
+                            <input type="text" class="form-control" wire:model="email">
+                            @error('email') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div> 
                         <div class="col-md-6">
                             <label>Department</label>
-                            <input type="text" class="form-control" wire:model="no_anggota_gold" />
+                            <input type="text" class="form-control" wire:model="department" />
+                            @error('department') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div>
                     </div>
                 </div>
@@ -194,7 +189,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-5 form-group" style="float:right;">
-                                    <label style="float:right;">TROUBLE TICKET</label>
+                                    <label style="float:right;">OTHER</label>
                                 </div>
                                 <div class="col-md-1 form-group">
                                     <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
@@ -212,10 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
-
-
+                  
 
                     </div>
                 </div>
@@ -233,27 +225,181 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-5 form-group" style="float:right;">
-                                    <label style="float:right;">TROUBLE TICKET</label>
+                                    <label style="float:right;">CORE SYSTEM</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
+                                    <input type="checkbox" class="form-check-input form-control" checked disabled>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
+                                    <input type="text" class="form-control" wire:model="core_system">
                                 
-                                    @error('departure_airport')
+                                    @error('core_system')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">FINANCE AND ACCOUNTING</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control" >
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">INVENTORY</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control" >
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">POINT OF SALES</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">HUMAN RESOURCES</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">PAYROLL</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">MOBILE ATTENDANCE</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">MOBILE STOCK OPNAME</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 form-group" style="float:right;">
+                                    <label style="float:right;">OTHER (PLEASE DESCRIBE)</label>
+                                </div>
+                                <div class="col-md-1 form-group">
+                                    <input type="checkbox" class="form-check-input form-control">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                
+                                    @error('core_system')
+                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
+
+                <br><br>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputAlamat">WORK REQUESTED (BUSINESS NEED OR PROBLEM)</label>
+                            <textarea name="" id="" cols="30" rows="6" class="form-control"></textarea>
+                            
+                            @error('wo_number') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div> 
+                    </div> 
+                </div> 
 
 
                 <br>
@@ -261,7 +407,7 @@
                     
                     <div class="col-md-12 form-group">
                         <a href="javascript:void(0)" wire:click="form1"><i class="fa fa-arrow-left"></i> Kembali</a>
-                        <button type="button" wire:loading.remove class="ml-3 btn btn-primary" wire:click="form3">{{ __('Submit Pendaftaran') }} <i class="fa fa-check"></i></button>
+                        <button type="button" wire:loading.remove class="ml-3 btn btn-primary" wire:click="form3">{{ __('Submit') }} <i class="fa fa-check"></i></button>
                         <span wire:loading>
                             <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
                             <span class="sr-only">{{ __('Loading...') }}</span>
