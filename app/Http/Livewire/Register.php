@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\UserMember;
+use App\Models\WorkOrder;
 use App\Models\User;
 use Illuminate\Validation\Rule; 
 use Illuminate\Support\Facades\Hash;
@@ -12,23 +13,46 @@ class Register extends Component
 {
 	use WithFileUploads;
 	public $name;
-	public $name_kta;
+	// public $name_kta;
     public $is_approve,$is_success=false;
-    public $extend_register1=false,$extend_register2=false;
+    // public $extend_register1=false,$extend_register2=false;
+
+	public $wo_number, $wo_date, $requester_name, $phone, $business_name, $cooperative_name, $email, $department, $work_requested;
+	public $modify_req, $implementation_req, $access_issue, $trouble_ticket, $other_action_req;
+    public $core_system, $finance_and_accounting, $inventory, $point_of_sales, $human_resources, $payroll, $mobile_attendance, $mobile_stock_opname, $other_software_service;
 
 
-	public $insert=false;
-	public $attachment_rekomendator_file, $attachment_rekomendator_name, $rand_id;
+    public $modify_req_field=false;
+    public $implementation_req_field=false;
+    public $access_issue_field=false;
+    public $trouble_ticket_field=false;
+    public $other_action_req_field=false;
 
-	protected $rules = [
-        'name' => 'required|string',
-        'name_kta' => 'required|string',
-        'email' => 'required|string',
-		'phone_number' => 'required',
-		'iuran_tetap'=>'required',
-		'sumbangan'=>'required',
-		'uang_pendaftaran'=>'required|numeric|min:50000',
-    ];
+    public $finance_and_accounting_field=false;
+    public $inventory_field=false;
+    public $point_of_sales_field=false;
+    public $human_resources_field=false;
+    public $payroll_field=false;
+    public $mobile_attendance_field=false;
+    public $mobile_stock_opname_field=false;
+    public $other_software_service_field=false;
+
+
+
+
+
+	// public $insert=false;
+	// public $attachment_rekomendator_file, $attachment_rekomendator_name, $rand_id;
+
+	// protected $rules = [
+    //     'name' => 'required|string',
+    //     'name_kta' => 'required|string',
+    //     'email' => 'required|string',
+	// 	'phone_number' => 'required',
+	// 	'iuran_tetap'=>'required',
+	// 	'sumbangan'=>'required',
+	// 	'uang_pendaftaran'=>'required|numeric|min:50000',
+    // ];
 
 	protected $listeners = ['save-all'=>'save_all'];
 
@@ -43,536 +67,133 @@ class Register extends Component
 		$this->form_no = date('ymd').UserMember::count();
 	}
 
-	public function save_all($num)
-	{
-		if($num==1) $this->validate_form_1 = true;
-		if($num==2) $this->validate_form_2 = true;
-		if($num==3) $this->validate_form_3 = true;
-		if($num==4) $this->validate_form_4 = true;
-		if($num==5) $this->validate_form_5 = true;
+	public function enablefield($type){
+		if($type == 'implementation_req'){
+			$this->implementation_req_field = true;
+		}
+
+		if($type == 'modify_req'){
+			$this->modify_req_field = true;
+		}
+
+		if($type == 'access_issue'){
+			$this->access_issue_field = true;
+		}
+
+		if($type == 'trouble_ticket'){
+			$this->trouble_ticket_field = true;
+		}
+
+		if($type == 'other_action_req'){
+			$this->other_action_req_field = true;
+		}
+
+		if($type == 'finance_and_accounting'){
+			$this->finance_and_accounting_field = true;
+		}
+
+		if($type == 'inventory'){
+			$this->inventory_field = true;
+		}
+
+		if($type == 'point_of_sales'){
+			$this->point_of_sales_field = true;
+		}
+
+		if($type == 'human_resources'){
+			$this->human_resources_field = true;
+		}
+
+		if($type == 'payroll'){
+			$this->payroll_field = true;
+		}
+
+		if($type == 'mobile_attendance'){
+			$this->mobile_attendance_field = true;
+		}
+
+		if($type == 'mobile_stock_opname'){
+			$this->mobile_stock_opname_field = true;
+		}
+
+		if($type == 'other_software_service'){
+			$this->other_software_service_field = true;
+		}
 		
-		if($this->umur >=65 and $this->umur <=74){ // di atas 65 dan di bawah 74 tahun wajib mendaftarkan satu anggota
-            if($this->validate_form_1){
-				$this->register();
-			}
-        }elseif($this->umur >=75 and $this->umur <= 79){ // diatas 75 tahun wajib mendaftarkan 2 anggota
-            if($this->validate_form_1 and $this->validate_form_2 ){
-				$this->register();
-			}
-        }elseif($this->umur>=80){
-            if($this->validate_form_1==true and $this->validate_form_2==true and $this->validate_form_3==true and $this->validate_form_4==true and $this->validate_form_5==true){
-				$this->register();
-			}
+	}
+
+	public function disablefield($type){
+		if($type == 'implementation_req'){
+			$this->implementation_req_field = false;
+		}
+
+		if($type == 'modify_req'){
+			$this->modify_req_field = false;
+		}
+
+		if($type == 'access_issue'){
+			$this->access_issue_field = false;
+		}
+
+		if($type == 'trouble_ticket'){
+			$this->trouble_ticket_field = false;
+		}
+
+		if($type == 'other_action_req'){
+			$this->other_action_req_field = false;
+		}
+
+		if($type == 'finance_and_accounting'){
+			$this->finance_and_accounting_field = false;
+		}
+
+		if($type == 'inventory'){
+			$this->inventory_field = false;
+		}
+
+		if($type == 'point_of_sales'){
+			$this->point_of_sales_field = false;
+		}
+
+		if($type == 'human_resources'){
+			$this->human_resources_field = false;
+		}
+
+		if($type == 'payroll'){
+			$this->payroll_field = false;
+		}
+
+		if($type == 'mobile_attendance'){
+			$this->mobile_attendance_field = false;
+		}
+
+		if($type == 'mobile_stock_opname'){
+			$this->mobile_stock_opname_field = false;
+		}
+
+		if($type == 'other_software_service'){
+			$this->other_software_service_field = false;
 		}
 	}
 
-	public function checkKTP()
-	{
-		if(empty($this->Id_Ktp)) return false;
-		$check = UserMember::where('Id_Ktp',$this->Id_Ktp)->first();
-		if($check){
-			$this->messageKtp = 1;
-			$this->name = $check->name;
-			$this->name_kta = $check->name_kta;
-			$this->email = $check->email;
-			$this->tempat_lahir = $check->tempat_lahir;
-			$this->tanggal_lahir = $check->tanggal_lahir;
-			$this->region = $check->region;
-			$this->address = $check->address;
-			$this->city = $check->city;
-			$this->city_lainnya = $check->city_lainnya;
-			$this->Id_Ktp = $check->Id_Ktp;
-			$this->jenis_kelamin = $check->jenis_kelamin;
-			$this->phone_number = $check->phone_number;
-			$this->blood_type = $check->blood_type;
-			$this->name_waris1 = $check->name_waris1;
-			$this->tempat_lahirwaris1 = $check->tempat_lahirwaris1;
-			$this->tanggal_lahirwaris1 = $check->tanggal_lahirwaris1;
-			$this->address_waris1 = $check->address_waris1;
-			$this->Id_Ktpwaris1 = $check->Id_Ktpwaris1;
-			$this->jenis_kelaminwaris1 = $check->jenis_kelaminwaris1;
-			$this->phone_numberwaris1 = $check->phone_numberwaris1;
-			$this->blood_typewaris1 = $check->blood_typewaris1;
-			$this->hubungananggota1 = $check->hubungananggota1;
-			$this->hubungananggota1_lainnya = $check->hubungananggota1_lainnya;
-			$this->name_waris2 = $check->name_waris2;
-			$this->tempat_lahirwaris2 = $check->tempat_lahirwaris2;
-			$this->tanggal_lahirwaris2 = $check->tanggal_lahirwaris2;
-			$this->address_waris2 = $check->address_waris2;
-			$this->Id_Ktpwaris2 = $check->Id_Ktpwaris2;
-			$this->jenis_kelaminwaris2 = $check->jenis_kelaminwaris2;
-			$this->phone_numberwaris2 = $check->phone_numberwaris2;
-			$this->blood_typewaris2 = $check->blood_typewaris2;
-			$this->hubungananggota2 = $check->hubungananggota2;
-			$this->hubungananggota2_lainnya = $check->hubungananggota2_lainnya;
-		}else{
-			$id_ktp = $this->Id_Ktp;
-			$this->reset();
-			$this->Id_Ktp = $id_ktp;
-			$this->messageKtp=2;
-		} 
-		$this->form_no = date('ymd').UserMember::count();
-	}
-
-	public function calculate_()
-	{
-		$this->total_iuran_tetap = $this->iuran_tetap * 30000;
-		if($this->uang_pendaftaran!="") $this->total = $this->uang_pendaftaran;
-		$this->total += $this->total_iuran_tetap;
-	}
-	
-	public function form1()
-	{
-		$this->show_form1=true;
-		$this->show_form2=false;
-	}
-	public function form2()
-	{
-		$rules = [
-			'Id_Ktp'=>['required',
-								Rule::unique('user_member')->where(function($query) {
-									$query->where('Id_Ktp', $this->Id_Ktp)->where('status', 2);
-								})
-							],
-			'name' => 'required|string',
-			'name_kta' => 'required|string',
-			'phone_number' => 'required',
-			'iuran_tetap'=>'required',
-			'uang_pendaftaran'=>'required|numeric|min:50000',
-			'tanggal_lahir' => 'required',
-			'email' => 'required',
-		];
-		$message_rules = [
-			"Id_Ktp.unique" => "Maaf No KTP sudah digunakan silahkan dicoba dengan No KTP yang lain.",
-			"uang_pendaftaran.min" => "Minimal uang pendaftaran Rp. 50.000,-"
-		];
-
-		$this->validate($rules,$message_rules);
-		
-		$this->show_form1=false;
-		$this->show_form2=true;
-		$this->show_form3=false;
-	}
-	public function form3()
-	{
-		$this->emit('counting_form');
-		$this->emit('validate-rekomendasi');
-	}
-	public function hitungUmur()
-	{
-		$this->umur = hitung_umur($this->tanggal_lahir);
-		$this->extend_register1=false;
-        $this->extend_register2=false;
-
-        if($this->umur >=65 and $this->umur <=74){ // di atas 65 dan di bawah 74 tahun wajib mendaftarkan satu anggota
-            $this->extend_register1=true;
-        }
-        if($this->umur >=75 and $this->umur <=79){ // diatas 75 dan 79 tahun wajib mendaftarkan 2 anggota
-            $this->extend_register1=true;
-            $this->extend_register2=true;
-        }
-		if($this->umur >=80){ // diatas 80 >= wajib mendaftarkan 5 orang
-            $this->extend_register1=true;
-            $this->extend_register2=true;
-            $this->extend_register3=true;
-            $this->extend_register4=true;
-            $this->extend_register5=true;
-        }
-    	
-	}
-
-	public function register()
-    {
-		$rules = [
-			'Id_Ktp'=>['required',
-								Rule::unique('user_member')->where(function($query) {
-									$query->where('Id_Ktp', $this->Id_Ktp)->where('status', 2);
-								})
-							],
-			'name' => 'required|string',
-			'name_kta' => 'required|string',
-			'phone_number' => 'required',
-			'iuran_tetap'=>'required',
-			'uang_pendaftaran'=>'required|numeric|min:50000',
-			'tanggal_lahir' => 'required',
-			'email' => 'required',
-		];
-
-
-		if($this->foto_ktp!="") $rules['foto_ktp'] = 'image:max:1024'; // 1Mb Max;
-		if($this->foto_kk!="") $rules['foto_kk'] = 'image:max:1024'; // 1Mb Max;
-		if($this->ttd_member!="") $rules['ttd_member'] = 'image:max:1024'; // 1Mb Max;
-		if($this->pas_foto!="") $rules['pas_foto'] = 'image:max:1024'; // 1Mb Max;
-		if($this->foto_ktpwaris1!="") $rules['foto_ktpwaris1'] = 'image:max:1024'; // 1Mb Max;
-		if($this->ttd_ahliwaris1!="") $rules['ttd_ahliwaris1'] = 'image:max:1024'; // 1Mb Max;
-		if($this->foto_ktpwaris2!="") $rules['foto_ktpwaris2'] = 'image:max:1024'; // 1Mb Max;
-		if($this->ttd_ahliwaris2!="") $rules['ttd_ahliwaris2'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend1_foto_ktp!="") $rules['extend1_foto_ktp'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend1_foto_kk!="") $rules['extend1_foto_kk'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend1_pas_foto!="") $rules['extend1_pas_foto'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend1_foto_ktpwaris1!="") $rules['extend1_foto_ktpwaris1'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend1_foto_ktpwaris2!="") $rules['extend1_foto_ktpwaris2'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend2_foto_kk!="") $rules['extend2_foto_kk'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend2_pas_foto!="") $rules['extend2_pas_foto'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend2_foto_ktpwaris1!="") $rules['extend2_foto_ktpwaris1'] = 'image:max:1024'; // 1Mb Max;
-		if($this->extend2_foto_ktpwaris2!="") $rules['extend2_foto_ktpwaris2'] = 'image:max:1024'; // 1Mb Max;
-
-		$message_rules = [
-			"Id_Ktp.unique" => "Maaf No KTP sudah digunakan silahkan dicoba dengan No KTP yang lain.",
-			"uang_pendaftaran.min" => "Minimal uang pendaftaran Rp. 50.000,-"
-		];
-    	
-		$this->validate($rules,$message_rules);
-		
-		$password = generate_password($this->name,$this->tanggal_lahir);
+	public function save(){
+		$data 					= new WorkOrder();
+        $data->wo_number		= $this->wo_number;
+        $data->wo_date			= $this->wo_date;
+        $data->requester_name	= $this->requester_name;
+        $data->phone			= $this->phone;
+        $data->business_name	= $this->business_name;
+        $data->cooperative		= $this->cooperative_name;
+        $data->email			= $this->email;
+        $data->department		= $this->department;
         
-		$user = new User();
-        $user->user_access_id = 4; // Member
-        $user->nik = $this->Id_Ktp;
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->telepon = $this->phone_number;
-        $user->address = $this->address;
-        $user->password = Hash::make($password);
-		// $user->username = $no_anggota;
-        $user->save();
-
-		$data = new UserMember($rules,$message_rules);
-		$data->no_anggota_gold = $this->no_anggota_gold;
-     	$data->no_form = $this->form_no;
-     	$data->name = $this->name;
-     	$data->name_kta = $this->name_kta;
-     	$data->email = $this->email;
-     	$data->tempat_lahir = $this->tempat_lahir;
-     	$data->tanggal_lahir = $this->tanggal_lahir;
-     	$data->region = $this->region;
-     	$data->address = $this->address;
-     	$data->city = $this->city;
-     	$data->city_lainnya = $this->city_lainnya;
-     	$data->Id_Ktp = $this->Id_Ktp;
-     	$data->jenis_kelamin = $this->jenis_kelamin;
-     	$data->phone_number = $this->phone_number;
-     	$data->blood_type = $this->blood_type;
-     	$data->name_waris1 = $this->name_waris1;
-     	$data->tempat_lahirwaris1 = $this->tempat_lahirwaris1;
-     	$data->tanggal_lahirwaris1 = $this->tanggal_lahirwaris1;
-     	$data->address_waris1 = $this->address_waris1;
-     	$data->Id_Ktpwaris1 = $this->Id_Ktpwaris1;
-     	$data->jenis_kelaminwaris1 = $this->jenis_kelaminwaris1;
-     	$data->phone_numberwaris1 = $this->phone_numberwaris1;
-     	$data->blood_typewaris1 = $this->blood_typewaris1;
-     	$data->hubungananggota1 = $this->hubungananggota1;
-     	$data->hubungananggota1_lainnya = $this->hubungananggota1_lainnya;
-     	$data->name_waris2 = $this->name_waris2;
-     	$data->tempat_lahirwaris2 = $this->tempat_lahirwaris2;
-     	$data->tanggal_lahirwaris2 = $this->tanggal_lahirwaris2;
-     	$data->address_waris2 = $this->address_waris2;
-     	$data->Id_Ktpwaris2 = $this->Id_Ktpwaris2;
-     	$data->jenis_kelaminwaris2 = $this->jenis_kelaminwaris2;
-     	$data->phone_numberwaris2 = $this->phone_numberwaris2;
-     	$data->blood_typewaris2 = $this->blood_typewaris2;
-     	$data->hubungananggota2 = $this->hubungananggota2;
-     	$data->hubungananggota2_lainnya = $this->hubungananggota2_lainnya;
-	
-        if($this->foto_ktp!=""){
-            $namektp = 'foto_ktp'.date('Ymdhis').'.'.$this->foto_ktp->extension();
-            $this->foto_ktp->storePubliclyAs('public',$namektp);
-            $data->foto_ktp = $namektp;
-        }
-
-        if($this->foto_kk!=""){
-            $namekk = 'foto_kk'.date('Ymdhis').'.'.$this->foto_kk->extension();
-            $this->foto_kk->storePubliclyAs('public',$namekk);
-            $data->foto_kk = $namekk;
-        }
-
-		if($this->ttd_member!=""){
-            $ttdmember = 'ttd_member'.date('Ymdhis').'.'.$this->ttd_member->extension();
-            $this->ttd_member->storePubliclyAs('public',$ttdmember);
-            $data->ttd_member = $ttdmember;
-        }
-
-        if($this->pas_foto!=""){
-            $namepasfoto = 'pas_foto'.date('Ymdhis').'.'.$this->pas_foto->extension();
-            $this->pas_foto->storePubliclyAs('public',$namepasfoto);
-            $data->pas_foto = $namepasfoto;
-        }
-        if($this->foto_ktpwaris1!=""){
-            $namefotoktpwaris1 = 'foto_ktpwaris1'.date('Ymdhis').'.'.$this->foto_ktpwaris1->extension();
-            $this->foto_ktpwaris1->storePubliclyAs('public',$namefotoktpwaris1);
-            $data->foto_ktpwaris1 = $namefotoktpwaris1;
-        }
-
-		if($this->ttd_ahliwaris1!=""){
-            $ttdwaris1 = 'ttd_ahliwaris1'.date('Ymdhis').'.'.$this->ttd_ahliwaris1->extension();
-            $this->ttd_ahliwaris1->storePubliclyAs('public',$ttdwaris1);
-            $data->ttd_ahliwaris1 = $ttdwaris1;
-        }
-
-
-        if($this->foto_ktpwaris2!=""){
-            $namefotoktpwaris2 = 'foto_ktpwaris2'.date('Ymdhis').'.'.$this->foto_ktpwaris2->extension();
-            $this->foto_ktpwaris2->storePubliclyAs('public',$namefotoktpwaris2);
-            $data->foto_ktpwaris2 = $namefotoktpwaris2;
-		}
-
-		if($this->ttd_ahliwaris2!=""){
-            $ttdwaris2 = 'ttd_ahliwaris2'.date('Ymdhis').'.'.$this->ttd_ahliwaris2->extension();
-            $this->ttd_ahliwaris2->storePubliclyAs('public',$ttdwaris2);
-            $data->ttd_ahliwaris2 = $ttdwaris2;
-        }
-
-		$data->iuran_tetap = $this->iuran_tetap;
-		$data->total_iuran_tetap = $this->total_iuran_tetap;
-		$data->sumbangan = $this->sumbangan;
-		$data->uang_pendaftaran = $this->uang_pendaftaran;
-		$data->total_pembayaran = $this->total;
-		
-		if($this->referal_code !="") {
-			$kord = User::where('referal_code',$this->referal_code)->first();
-			if($kord){
-				$dataMember = UserMember::where('user_id',$kord->id)->first();
-				$data->koordinator_id = $dataMember->id;
-			}
-		}
-		$data->save();
-
-		if($this->extend1_Id_Ktp !=""){
-			$dataExtends1 = new UserMember();
-			$dataExtends1->no_form = date('ymd').\App\Models\UserMember::count();
-			$dataExtends1->status = 0;
-			$dataExtends1->user_id_recomendation = $data->id;
-			$dataExtends1->koordinator_id = $data->koordinator_id;
-			$dataExtends1->name = $this->extend1_name;
-	     	$dataExtends1->name_kta = $this->extend1_name_kta;
-	     	$dataExtends1->email = $this->extend1_email;
-	     	$dataExtends1->tempat_lahir = $this->extend1_tempat_lahir;
-	     	$dataExtends1->tanggal_lahir = $this->extend1_tanggal_lahir;
-	     	$dataExtends1->region = $this->extend1_region;
-	     	$dataExtends1->address = $this->extend1_address;
-	     	$dataExtends1->city = $this->extend1_city;
-	     	$dataExtends1->city_lainnya = $this->extend1_city_lainnya;
-	     	$dataExtends1->Id_Ktp = $this->extend1_Id_Ktp;
-	     	$dataExtends1->jenis_kelamin = $this->extend1_jenis_kelamin;
-	     	$dataExtends1->phone_number = $this->extend1_phone_number;
-	     	$dataExtends1->blood_type = $this->extend1_blood_type;
-	     	$dataExtends1->name_waris1 = $this->extend1_name_waris1;
-	     	$dataExtends1->tempat_lahirwaris1 = $this->extend1_tempat_lahirwaris1;
-	     	$dataExtends1->tanggal_lahirwaris1 = $this->extend1_tanggal_lahirwaris1;
-	     	$dataExtends1->address_waris1 = $this->extend1_address_waris1;
-	     	$dataExtends1->Id_Ktpwaris1 = $this->extend1_Id_Ktpwaris1;
-	     	$dataExtends1->jenis_kelaminwaris1 = $this->extend1_jenis_kelaminwaris1;
-	     	$dataExtends1->phone_numberwaris1 = $this->extend1_phone_numberwaris1;
-	     	$dataExtends1->blood_typewaris1 = $this->extend1_blood_typewaris1;
-	     	$dataExtends1->hubungananggota1 = $this->extend1_hubungananggota1;
-	     	$dataExtends1->hubungananggota1_lainnya = $this->extend1_hubungananggota1_lainnya;
-	     	$dataExtends1->name_waris2 = $this->extend1_name_waris2;
-	     	$dataExtends1->tempat_lahirwaris2 = $this->extend1_tempat_lahirwaris2;
-	     	$dataExtends1->tanggal_lahirwaris2 = $this->extend1_tanggal_lahirwaris2;
-	     	$dataExtends1->address_waris2 = $this->extend1_address_waris2;
-	     	$dataExtends1->Id_Ktpwaris2 = $this->extend1_Id_Ktpwaris2;
-	     	$dataExtends1->jenis_kelaminwaris2 = $this->extend1_jenis_kelaminwaris2;
-	     	$dataExtends1->phone_numberwaris2 = $this->extend1_phone_numberwaris2;
-	     	$dataExtends1->blood_typewaris2 = $this->extend1_blood_typewaris2;
-	     	$dataExtends1->hubungananggota2 = $this->extend1_hubungananggota2;
-	     	$dataExtends1->hubungananggota2_lainnya = $this->extend1_hubungananggota2_lainnya;
-
-	        if($this->extend1_foto_ktp!=""){
-	            $extend1_namektp = 'foto_ktp'.date('Ymdhis').'.'.$this->extend1_foto_ktp->extension();
-	            $this->extend1_foto_ktp->storePubliclyAs('public',$extend1_namektp);
-	            $dataExtends1->foto_ktp = $extend1_namektp;
-	        }
-
-	        if($this->extend1_foto_kk!=""){
-	            $extend1_namekk = 'foto_kk'.date('Ymdhis').'.'.$this->extend1_foto_kk->extension();
-	            $this->extend1_foto_kk->storePubliclyAs('public',$extend1_namekk);
-	            $dataExtends1->foto_kk = $extend1_namekk;
-	        }
-
-	        if($this->extend1_pas_foto!=""){
-	            $extend1_namepasfoto = 'pas_foto'.date('Ymdhis').'.'.$this->extend1_pas_foto->extension();
-	            $this->extend1_pas_foto->storePubliclyAs('public',$extend1_namepasfoto);
-	            $dataExtends1->pas_foto = $extend1_namepasfoto;
-	        }
-
-	        if($this->extend1_foto_ktpwaris1!=""){
-	            $extend1_namefotoktpwaris1 = 'foto_ktpwaris1'.date('Ymdhis').'.'.$this->extend1_foto_ktpwaris1->extension();
-	            $this->extend1_foto_ktpwaris1->storePubliclyAs('public',$extend1_namefotoktpwaris1);
-	            $dataExtends1->foto_ktpwaris1 = $extend1_namefotoktpwaris1;
-	        }
-
-	        if($this->extend1_foto_ktpwaris2!=""){
-	            $extend1_namefotoktpwaris2 = 'foto_ktpwaris2'.date('Ymdhis').'.'.$this->extend1_foto_ktpwaris2->extension();
-	            $this->extend1_foto_ktpwaris2->storePubliclyAs('public',$extend1_namefotoktpwaris2);
-	            $dataExtends1->foto_ktpwaris2 = $extend1_namefotoktpwaris2;
-			}
-			
-			$dataExtends1->iuran_tetap = $this->extend1_iuran_tetap;
-			$dataExtends1->total_iuran_tetap = $this->extend1_total_iuran_tetap;
-			$dataExtends1->sumbangan = $this->extend1_sumbangan;
-			$dataExtends1->total_sumbangan = $this->extend1_total_sumbangan;
-			$dataExtends1->uang_pendaftaran = $this->extend1_uang_pendaftaran;
-			$dataExtends1->total_pembayaran = $this->extend1_total;
-			$dataExtends1->save();
-		}
-		
-		if($this->extend2_Id_Ktp !=""){
-			$dataExtends2 = new UserMember();
-			$dataExtends2->no_form = date('ymd').(\App\Models\UserMember::count()+1);
-			$dataExtends2->status = 0;
-			$dataExtends2->user_id_recomendation = $data->id;
-			$dataExtends2->koordinator_id = $data->koordinator_id;
-			$dataExtends2->name = $this->extend2_name;
-	     	$dataExtends2->name_kta = $this->extend2_name_kta;
-	     	$dataExtends2->email = $this->extend2_email;
-	     	$dataExtends2->tempat_lahir = $this->extend2_tempat_lahir;
-	     	$dataExtends2->tanggal_lahir = $this->extend2_tanggal_lahir;
-	     	$dataExtends2->region = $this->extend2_region;
-	     	$dataExtends2->address = $this->extend2_address;
-	     	$dataExtends2->city = $this->extend2_city;
-	     	$dataExtends2->city_lainnya = $this->extend2_city_lainnya;
-	     	$dataExtends2->Id_Ktp = $this->extend2_Id_Ktp;
-	     	$dataExtends2->jenis_kelamin = $this->extend2_jenis_kelamin;
-	     	$dataExtends2->phone_number = $this->extend2_phone_number;
-	     	$dataExtends2->blood_type = $this->extend2_blood_type;
-	     	$dataExtends2->name_waris1 = $this->extend2_name_waris1;
-	     	$dataExtends2->tempat_lahirwaris1 = $this->extend2_tempat_lahirwaris1;
-	     	$dataExtends2->tanggal_lahirwaris1 = $this->extend2_tanggal_lahirwaris1;
-	     	$dataExtends2->address_waris1 = $this->extend2_address_waris1;
-	     	$dataExtends2->Id_Ktpwaris1 = $this->extend2_Id_Ktpwaris1;
-	     	$dataExtends2->jenis_kelaminwaris1 = $this->extend2_jenis_kelaminwaris1;
-	     	$dataExtends2->phone_numberwaris1 = $this->extend2_phone_numberwaris1;
-	     	$dataExtends2->blood_typewaris1 = $this->extend2_blood_typewaris1;
-	     	$dataExtends2->hubungananggota1 = $this->extend2_hubungananggota1;
-	     	$dataExtends2->hubungananggota1_lainnya = $this->extend2_hubungananggota1_lainnya;
-	     	$dataExtends2->name_waris2 = $this->extend2_name_waris2;
-	     	$dataExtends2->tempat_lahirwaris2 = $this->extend2_tempat_lahirwaris2;
-	     	$dataExtends2->tanggal_lahirwaris2 = $this->extend2_tanggal_lahirwaris2;
-	     	$dataExtends2->address_waris2 = $this->extend2_address_waris2;
-	     	$dataExtends2->Id_Ktpwaris2 = $this->extend2_Id_Ktpwaris2;
-	     	$dataExtends2->jenis_kelaminwaris2 = $this->extend2_jenis_kelaminwaris2;
-	     	$dataExtends2->phone_numberwaris2 = $this->extend2_phone_numberwaris2;
-	     	$dataExtends2->blood_typewaris2 = $this->extend2_blood_typewaris2;
-	     	$dataExtends2->hubungananggota2 = $this->extend2_hubungananggota2;
-	     	$dataExtends2->hubungananggota2_lainnya = $this->extend2_hubungananggota2_lainnya;
-
-	        if($this->extend2_foto_ktp!=""){
-	            $extend2_namektp = 'foto_ktp'.date('Ymdhis').'.'.$this->extend2_foto_ktp->extension();
-	            $this->extend2_foto_ktp->storePubliclyAs('public',$extend2_namektp);
-	            $dataExtends2->foto_ktp = $extend2_namektp;
-	        }
-
-	        if($this->extend2_foto_kk!=""){
-	            $extend2_namekk = 'foto_kk'.date('Ymdhis').'.'.$this->extend2_foto_kk->extension();
-	            $this->extend2_foto_kk->storePubliclyAs('public',$extend2_namekk);
-	            $dataExtends2->foto_kk = $extend1_namekk;
-	        }
-	        if($this->extend2_pas_foto!=""){
-	            $extend2_namepasfoto = 'pas_foto'.date('Ymdhis').'.'.$this->extend2_pas_foto->extension();
-	            $this->extend2_pas_foto->storePubliclyAs('public',$extend2_namepasfoto);
-	            $dataExtends2->pas_foto = $extend2_namepasfoto;
-	        }
-	        if($this->extend2_foto_ktpwaris1!=""){
-	            $extend2_namefotoktpwaris1 = 'foto_ktpwaris1'.date('Ymdhis').'.'.$this->extend2_foto_ktpwaris1->extension();
-	            $this->extend2_foto_ktpwaris1->storePubliclyAs('public',$extend2_namefotoktpwaris1);
-	            $dataExtends2->foto_ktpwaris1 = $extend2_namefotoktpwaris1;
-	        }
-	        if($this->extend2_foto_ktpwaris2!=""){
-	            $extend2_namefotoktpwaris2 = 'foto_ktpwaris2'.date('Ymdhis').'.'.$this->extend2_foto_ktpwaris2->extension();
-	            $this->extend2_foto_ktpwaris2->storePubliclyAs('public',$extend2_namefotoktpwaris2);
-	            $dataExtends2->foto_ktpwaris2 = $extend2_namefotoktpwaris2;
-			}
-			$dataExtends2->iuran_tetap = $this->extend2_iuran_tetap;
-			$dataExtends2->total_iuran_tetap = $this->extend2_total_iuran_tetap;
-			$dataExtends2->sumbangan = $this->extend2_sumbangan;
-			$dataExtends2->total_sumbangan = $this->extend2_total_sumbangan;
-			$dataExtends2->uang_pendaftaran = $this->extend2_uang_pendaftaran;
-			$dataExtends2->total_pembayaran = $this->extend2_total;
-
-			$dataExtends2->save();
-		}
-
-		// $recomendator_attachment 								= new RekomendatorAttachment();
-        // $recomendator_attachment->attachment_rekomendator_file 	= $this->attachment_rekomendator_file;
-        // $recomendator_attachment->attachment_rekomendator_name 	= $this->attachment_rekomendator_name;
-        // $recomendator_attachment->save();
-
-		// $this->updateattachmentrekomendator($this->rand_id, $data->id);
-		
-		// $messageWa = "Pendaftaran anda akan segera kami proses, silahkan melakukan pembayaran pada salah satu Rekening Kami dibawah ini, dengan nominal : *Rp. ".format_idr($this->total)."*\n\n";
-		// //$messageWa .= "\nSilahkan lakukan pembayaran ke Nomor Rekening Perusahan dibawah ini\n\n";
-		// foreach(BankAccount::all() as $bank){
-		// 	$messageWa .= $bank->bank .' '. $bank->no_rekening .' an '. $bank->owner ."\n";
-		// }
-		// $messageWa  .= "\nKonfirmasi Pembayaran : \n<a href=\"". route('konfirmasi-pembayaran')."?s=". $this->form_no ."\">".route('konfirmasi-pembayaran')."?s=". $this->form_no ."</a>";        
         
-		$messageWa = "Pengajuan pendaftaran akan segera kami pross";
+        $data->save();
+
         
-		sendNotifWa($messageWa, $this->phone_number);
-        
-		\Mail::to($data->email)->send(new \App\Mail\GeneralEmail("[YS SANTA MARIA] - Pendaftaran Anggota",$messageWa));    
+		session()->flash('message-success',__('Data berhasil disimpan'));
 
-		if($this->validate_form_1){ $this->emit('save_rekomendasi',['num'=>1,'id'=>$data->id,'koordinator_id'=>$data->koordinator_id]);}
-		if($this->validate_form_2){ $this->emit('save_rekomendasi',['num'=>2,'id'=>$data->id,'koordinator_id'=>$data->koordinator_id]);}
-		if($this->validate_form_3){ $this->emit('save_rekomendasi',['num'=>3,'id'=>$data->id,'koordinator_id'=>$data->koordinator_id]);}
-		if($this->validate_form_4){ $this->emit('save_rekomendasi',['num'=>4,'id'=>$data->id,'koordinator_id'=>$data->koordinator_id]);}
-		if($this->validate_form_5){ $this->emit('save_rekomendasi',['num'=>5,'id'=>$data->id,'koordinator_id'=>$data->koordinator_id]);}
+        return redirect()->to('register');
+	}
 
-        // if($this->extend1_Id_Ktp !=""){
-        // 	$messageWaextend1 = "Pendaftaran anda akan segera kami proses, silahkan melakukan pembayaran pada salah satu Rekening Kami dibawah ini, dengan nominal : *Rp. ".format_idr($this->extend1_total)."*\n\n";
-		// 	foreach(\App\Models\BankAccount::all() as $bank){
-		// 		$messageWaextend1 .= $bank->bank .' '. $bank->no_rekening .' an '. $bank->owner ."\n";
-		// 	}
-		// 	$messageWaextend1  .= "\nKonfirmasi Pembayaran : \n<a href=\"". route('konfirmasi-pembayaran')."?s=". $dataExtends1->no_form ."\">".route('konfirmasi-pembayaran')."?s=". $dataExtends1->no_form ."</a>";        
-	    //     sendNotifWa($messageWaextend1, $this->extend1_phone_number);
-        // }
-        // if($this->extend2_Id_Ktp !=""){
-        // 	$messageWaextend2 = "Pendaftaran anda akan segera kami proses, silahkan melakukan pembayaran pada salah satu Rekening Kami dibawah ini, dengan nominal : *Rp. ".format_idr($this->extend2_total)."*\n\n";
-		// 	foreach(\App\Models\BankAccount::all() as $bank){
-		// 		$messageWaextend2 .= $bank->bank .' '. $bank->no_rekening .' an '. $bank->owner ."\n";
-		// 	}
-		// 	$messageWaextend2  .= "\nKonfirmasi Pembayaran : \n<a href=\"". route('konfirmasi-pembayaran')."?s=". $dataExtends2->no_form ."\">".route('konfirmasi-pembayaran')."?s=". $dataExtends2->no_form ."</a>";        
-	    //     sendNotifWa($messageWaextend2, $this->extend2_phone_number);
-        // }
-
-		$this->is_success =true;
-        //session()->flash('message-success',__('Data saved successfully'));
-        //return redirect()->to('login');
-
-
-		$this->insert = false;
-    }
-
-
-	// public function saveattachmentrekomendator()
-    // {
-    //     // $this->validate([
-    //     //     'project_id'=>'image:max:1024',
-    //     //     'week'=>'required',
-    //     //     'budget'=>'required',
-    //     // ]);
-
-    //     $data 									= new RekomendatorAttachment();
-    //     $data->user_registration			 	= $this->rand_id;
-    //     $data->rekomendator_id				 	= $this->user_id_recomendation;
-    //     $data->attachment_rekomendator_file 	= $this->attachment_rekomendator_file;
-    //     $data->attachment_rekomendator_name 	= $this->attachment_rekomendator_name;
-    //     $data->save();
-
-    //     $this->insert = false;
-    //     // $this->reset(['budget']);
-    //     $this->emit('reload');
-    // }
-
-
-	// public function updateattachmentrekomendator($rand_id, $id_user_registration)
-    // {
-    //     $data 						= RekomendatorAttachment::where('user_registration', $rand_id)->get();
-    //     $data->user_registration 	= $user_registration;
-    //     $data->save();
-
-    //     $this->insert = false;
-    //     // $this->reset(['budget']);
-    //     // $this->emit('reload');
-    // }
 }

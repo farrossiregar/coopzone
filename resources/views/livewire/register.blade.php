@@ -19,7 +19,7 @@
             <p>Terima kasih telah mendaftarkan diri anda sebagai Anggota Yayasan Sosial Santa Maria. Data diri anda akan segera kami proses setelah pembayaran kami terima. Silahkan cek email / Whatsapp anda untuk mendapatkan informasi pembayaran.</p>
             <h6 class="text-success"><small>Nomor Form : </small> {{$form_no}} <a href="javascript:;" class="badge badge-warning" onclick="copy_text({{$form_no}})">Copy</a></h6>
         </div>
-        <form class="form-auth-small" method="POST" wire:submit.prevent="register" action="" {!!($is_success?'style="display:none"':'')!!}>
+        <form class="form-auth-small" method="POST" wire:submit.prevent="save" >
             
                 <!-- <div class="alert alert-warning alert-dismissible" role="alert">
                    
@@ -104,16 +104,21 @@
                                     <label style="float:right;">REQUEST FOR NEW IMPLEMENTATION</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
+                                    @if($implementation_req_field == true)
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('implementation_req')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('implementation_req')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
+
+                                    @if($implementation_req_field == true)
+                                        <input type="text" class="form-control" wire:model="modify_req">
+                                    @else
+                                        <input type="text" class="form-control" wire:model="implementation_req" readonly>
+                                    @endif
                                 
-                                    @error('departure_airport')
+                                    @error('implementation_req')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -126,16 +131,24 @@
                                     <label style="float:right;">REQUEST TO MODIFY OR ENHANCE EXISTING</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
+                                    @if($modify_req_field == true)
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('modify_req')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('modify_req')">
+                                    @endif
                                 
-                                    @error('departure_airport')
+                                    @error('modify_req')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
+                                    @if($modify_req_field == true)
+                                    <input type="text" class="form-control" wire:model="modify_req">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="modify_req" readonly>
+                                    @endif
                                 
-                                    @error('departure_airport')
+                                    @error('modify_req')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -148,16 +161,21 @@
                                     <label style="float:right;">ACCESS ISSUE</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
+                                    @if($access_issue_field == true)
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('access_issue')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('access_issue')">
+                                    @endif
+
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
+                                    @if($access_issue_field == true)
+                                    <input type="text" class="form-control" wire:model="access_issue">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="access_issue" readonly>
+                                    @endif
                                 
-                                    @error('departure_airport')
+                                    @error('access_issue')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -170,16 +188,21 @@
                                     <label style="float:right;">TROUBLE TICKET</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
+                                    @if($trouble_ticket_field == true)
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('trouble_ticket')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('trouble_ticket')">
+                                    @endif
+
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
+                                    @if($trouble_ticket_field == true)  
+                                    <input type="text" class="form-control" wire:model="trouble_ticket">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="trouble_ticket" readonly>
+                                    @endif
+
+                                    @error('trouble_ticket')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -192,16 +215,20 @@
                                     <label style="float:right;">OTHER</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" wire:model="departure_airport" readonly>
-                                
-                                    @error('departure_airport')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
+                                    @if($other_action_req_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('other_action_req')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('other_action_req')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="departure_airport" readonly>
+                                    @if($other_action_req_field == true) 
+                                    <input type="text" class="form-control" wire:model="other_action_req">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="other_action_req" readonly>
+                                    @endif
                                 
-                                    @error('departure_airport')
+                                    @error('other_action_req')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -231,7 +258,7 @@
                                     <input type="checkbox" class="form-check-input form-control" checked disabled>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system">
+                                    <input type="text" class="form-control" wire:model="core_system" required>
                                 
                                     @error('core_system')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
@@ -246,12 +273,20 @@
                                     <label style="float:right;">FINANCE AND ACCOUNTING</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" >
+                                    @if($finance_and_accounting_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('finance_and_accounting')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('finance_and_accounting')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($finance_and_accounting_field == true) 
+                                    <input type="text" class="form-control" wire:model="finance_and_accounting">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="finance_and_accounting" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('finance_and_accounting')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -264,12 +299,20 @@
                                     <label style="float:right;">INVENTORY</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control" >
+                                    @if($inventory_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('inventory')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('inventory')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($inventory_field == true)  
+                                    <input type="text" class="form-control" wire:model="inventory">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="inventory" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('inventory')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -282,12 +325,20 @@
                                     <label style="float:right;">POINT OF SALES</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($point_of_sales_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('point_of_sales')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('point_of_sales')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($point_of_sales_field == true)  
+                                    <input type="text" class="form-control" wire:model="point_of_sales">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="point_of_sales" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('point_of_sales')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -301,12 +352,20 @@
                                     <label style="float:right;">HUMAN RESOURCES</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($human_resources_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('human_resources')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('human_resources')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($human_resources_field == true)  
+                                    <input type="text" class="form-control" wire:model="human_resources">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="human_resources" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('human_resources')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -319,12 +378,20 @@
                                     <label style="float:right;">PAYROLL</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($payroll_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('payroll')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('payroll')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($payroll_field == true)  
+                                    <input type="text" class="form-control" wire:model="payroll">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="payroll" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('payroll')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -337,12 +404,20 @@
                                     <label style="float:right;">MOBILE ATTENDANCE</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($mobile_attendance_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('mobile_attendance')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('mobile_attendance')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($mobile_attendance_field == true)  
+                                    <input type="text" class="form-control" wire:model="mobile_attendance">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="mobile_attendance" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('mobile_attendance')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -355,12 +430,20 @@
                                     <label style="float:right;">MOBILE STOCK OPNAME</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($mobile_stock_opname_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('mobile_stock_opname')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('mobile_stock_opname')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($mobile_stock_opname_field == true)    
+                                    <input type="text" class="form-control" wire:model="mobile_stock_opname">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="mobile_stock_opname" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('mobile_stock_opname')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -373,12 +456,20 @@
                                     <label style="float:right;">OTHER (PLEASE DESCRIBE)</label>
                                 </div>
                                 <div class="col-md-1 form-group">
-                                    <input type="checkbox" class="form-check-input form-control">
+                                    @if($other_software_service_field == true)  
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="disablefield('other_software_service')" checked>
+                                    @else
+                                    <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('other_software_service')">
+                                    @endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="text" class="form-control" wire:model="core_system" readonly>
+                                    @if($other_software_service_field == true)    
+                                    <input type="text" class="form-control" wire:model="other_software_service">
+                                    @else
+                                    <input type="text" class="form-control" wire:model="other_software_service" readonly>
+                                    @endif
                                 
-                                    @error('core_system')
+                                    @error('other_software_service')
                                     <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                     @enderror
                                 </div>
@@ -394,7 +485,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="exampleInputAlamat">WORK REQUESTED (BUSINESS NEED OR PROBLEM)</label>
-                            <textarea name="" id="" cols="30" rows="6" class="form-control"></textarea>
+                            <textarea name="" id="" cols="30" rows="6" class="form-control" wire:model="work_requested"></textarea>
                             
                             @error('wo_number') <span class="text-danger">{{ $message }}</span> @enderror
                         </div> 
@@ -407,11 +498,7 @@
                     
                     <div class="col-md-12 form-group">
                         <a href="javascript:void(0)" wire:click="form1"><i class="fa fa-arrow-left"></i> Kembali</a>
-                        <button type="button" wire:loading.remove class="ml-3 btn btn-primary" wire:click="form3">{{ __('Submit') }} <i class="fa fa-check"></i></button>
-                        <span wire:loading>
-                            <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-                            <span class="sr-only">{{ __('Loading...') }}</span>
-                        </span>
+                        <button type="submit" class="ml-3 btn btn-primary">{{ __('Submit') }} <i class="fa fa-check"></i></button>
                         
                     </div>
                 </div>
