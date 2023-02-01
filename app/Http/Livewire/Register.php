@@ -179,13 +179,31 @@ class Register extends Component
 	public function save(){
 		$data 					= new WorkOrder();
         $data->wo_number		= $this->wo_number;
-        $data->wo_date			= $this->wo_date;
+        $data->wo_date			= date('Y-m-d');//$this->wo_date;
         $data->requester_name	= $this->requester_name;
         $data->phone			= $this->phone;
         $data->business_name	= $this->business_name;
         $data->cooperative		= $this->cooperative_name;
         $data->email			= $this->email;
         $data->department		= $this->department;
+
+        $data->implementation_req		= $this->implementation_req;
+        $data->modify_req				= $this->modify_req;
+        $data->access_issue				= $this->access_issue;
+        $data->trouble_ticket			= $this->trouble_ticket;
+        $data->other_action_required	= $this->other_action_req;
+
+
+        $data->core_system				= $this->core_system;
+        $data->finance_and_accounting	= $this->finance_and_accounting;
+        $data->inventory				= $this->inventory;
+        $data->point_of_sales			= $this->point_of_sales;
+        $data->human_resources			= $this->human_resources;
+        $data->mobile_attendance		= $this->mobile_attendance;
+        $data->mobile_stock_opname		= $this->mobile_stock_opname;
+        $data->other_software_services	= $this->other_software_service;
+
+        $data->work_requested	= $this->work_requested;
         
         
         $data->save();

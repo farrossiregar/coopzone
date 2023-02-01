@@ -47,7 +47,7 @@
                         </div> 
                         <div class="col-md-6">
                             <label>WO Date</label>
-                            <input type="text" class="form-control" wire:model="wo_date" />
+                            <input type="text" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly/>
                             @error('wo_date') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
@@ -77,7 +77,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="exampleInputAlamat">Email</label>
-                            <input type="text" class="form-control" wire:model="email">
+                            <input type="email" class="form-control" wire:model="email">
                             @error('email') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div> 
                         <div class="col-md-6">
@@ -113,7 +113,7 @@
                                 <div class="col-md-6 form-group">
 
                                     @if($implementation_req_field == true)
-                                        <input type="text" class="form-control" wire:model="modify_req">
+                                        <input type="text" class="form-control" wire:model="implementation_req">
                                     @else
                                         <input type="text" class="form-control" wire:model="implementation_req" readonly>
                                     @endif
@@ -136,10 +136,6 @@
                                     @else
                                     <input type="checkbox" class="form-check-input form-control" wire:click="enablefield('modify_req')">
                                     @endif
-                                
-                                    @error('modify_req')
-                                    <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
                                     @if($modify_req_field == true)

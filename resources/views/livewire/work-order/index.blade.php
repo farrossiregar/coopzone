@@ -4,25 +4,11 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="header row">
-                <!-- <div class="col-md-2">
-                    <select class="form-control" wire:model="koordinator_id">
-                        <option value=""> --- Koordinator --- </option>
-                        @foreach(\App\Models\UserMember::groupBy('koordinator_nama')->get() as $koordinator)
-                            @if($koordinator->koordinator_nama=="") @continue @endif
-                            <option>{{$koordinator->koordinator_nama}}</option>
-                        @endforeach
-                    </select>
-                </div> -->
+              
                 <div class="col-md-2">
                     <input type="text" class="form-control" wire:model="keyword" placeholder="Pencarian" />
                 </div>
-                <!-- <div class="col-md-2 px-0">
-                    <select class="form-control" wire:model="status">
-                        <option value=""> --- Status --- </option>
-                        <option value="1">Inactive</option>
-                        <option value="2">Active</option>
-                    </select>
-                </div> -->
+                
                 <div class="col-md-6">
                     <!-- <a href="javascript:;" class="ml-2 btn btn-info" wire:click="downloadExcel"><i class="fa fa-download"></i> Download</a> -->
                     <a href="{{route('stock-photo.insert')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Image</a>
@@ -38,13 +24,35 @@
                         <thead>
                             <tr style="background: #eee;">
                                 <th>No</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Subcategory</th>
-                                <th>Source</th>
-                                <th>Uploaded Date</th>
-                                <!-- <th>Status</th> -->
+                                <th>WO Number</th>
+                                <th>WO Date</th>
+                                <th>Requester Name</th>
+                                <th>Business Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Cooperative Name</th>
+                                <th>Department</th>
+
+                                <th>Implementation Request</th>
+                                <th>Modify Request</th>
+                                <th>Access Issue</th>
+                                <th>Trouble Ticket</th>
+                                <th>Other</th>
+                                
+                                <th>Core System</th>
+                                <th>Finance and Acc</th>
+                                <th>Inventory</th>
+                                <th>Point of Sales</th>
+                                <th>Human Resources</th>
+                                <th>Payroll</th>
+                                <th>Mobile Attendance</th>
+                                <th>Mobile Stock Opname</th>
+                                <th>Other</th>
+
+                                <th>Work Requested</th>
+
+                                <th>Created Date</th>
+                                
                                 <th></th>
                             </tr>
                         </thead>
@@ -53,45 +61,15 @@
                             @foreach($data as $k => $item)
                             <tr>
                                 <td style="width: 50px;">{{$k+1}}</td>
-                                <td style="width: 50px;">
-                                    <!-- <img src="{{ asset('assets/img/bg-auth.jpg') }}" alt="Image" style="width: 95px;"/> -->
-                                    <?php //echo asset("storage/app/public/klaim/foto_kta20220917115852.jpg"); ?>
-                                    <img src="<?php echo asset('storage/Stock_Photo/thumbnail/'.$item->stock_photo); ?>" alt="Image" style="width: 120px;"/>
-                                    <!-- <img src="{{ public_path('foto_kta20220917115852.jpg') }}" alt="Image" style="width: 120px;"/> -->
-                                    <!-- <img src="{{ base_path('public/foto_kta20220917115852.jpg') }}" alt="Image Stock" style="width: 120px;"/> -->
-                                    <!-- <img src="{{ asset('storage/Vendor_Management/Org_chart/'.$item->org_chart.'') }}" alt="Image" style="width: 120px;"/> -->
-                                    <!-- <img src="{{ asset('storage/klaim/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
-                                    <!-- <img src="{{ asset('public/klaim/foto_kta20220917115850.jpg') }}" class="user-photo media-object" alt="Logo" style="width:100%;"> -->
-                                    <?php //echo public_path("storage/app/public/foto_kta20220917115852.jpg"); ?>
-                                    <!-- <img src="{{ asset('storage/foto_kta20220917115852.jpg') }}" class="user-photo media-object" alt="Logosss" style="width:100%;"> -->
-                                    <br>
-                                    
-                                    <!-- {{$item->foto_name}} -->
-                                </td>
-                                <td style="width: 50px;">{{$item->name}}</td>
-                                <td style="width: 50px;">{{$item->category}}</td>
-                                <td style="width: 50px;">{{$item->subcategory}}</td>
+                                <td style="width: 50px;">{{$item->wo_number}}</td>
+                                <td style="width: 50px;">{{$item->wo_date}}</td>
+                                <td style="width: 50px;">{{$item->requester_name}}</td>
+                                <td style="width: 50px;">{{$item->business_name}}</td>
+                                <td style="width: 50px;">{{$item->email}}</td>
                                 <td style="width: 50px;">{{$item->foto_source}}</td>
                                 <td style="width: 50px;">{{$item->created_at}}</td>
+                             
                                 
-                                <!-- <td> 
-                                    @if($item->status == 1)
-                                    <a href="javascript:void(0)" class="badge badge-success">Active</a>
-                                    @else
-                                    <a href="javascript:void(0)" class="badge badge-warning">Inactive</a>
-                                    @endif
-                                </td> -->
-                                
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
-                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <!-- <a class="dropdown-item" href="{{route('user-member.edit',['id'=>$item->id])}}"><i class="fa fa-trash"></i> Delete</a> -->
-                                            <a class="dropdown-item" href="javascript:void(0)" wire:click="delete({{$item->id}})"><i class="fa fa-trash"></i> Delete</a>
-                                            <!-- <a class="dropdown-item" href="javascript:void(0)" wire:click="set_member({{$item->id}})" data-toggle="modal" data-target="#modal_set_password"><i class="fa fa-key"></i> Set Password</a> -->
-                                        </div>
-                                    </div>    
-                                </td>
                             </tr>
                             @php($number--)
                             @endforeach
